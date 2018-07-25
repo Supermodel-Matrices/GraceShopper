@@ -1,8 +1,10 @@
 const Sequelize = require('sequelize');
+const Product = require('./Product');
+
 
 const db = new Sequelize('postgres://localhost:5432/graceshopper', {
   logging: false // unless you like the logs
   // ...and there are many other options you may want to play with
 });
 
-module.exports = { db };
+module.exports = { db, Product };
