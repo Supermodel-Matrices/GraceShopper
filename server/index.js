@@ -15,16 +15,20 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // app.use('/auth', require('./auth'))
 
+<<<<<<< HEAD
 app.use('/api', require('./api'));
+=======
+app.use('/api', require('./api/'));
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+>>>>>>> 5952ee671fe9b2818e2193ddfb1467340e4fe204
 
 app.use(function (req, res, next) {
   const err = new Error('Not found.');
   err.status = 404;
   next(err);
-});
-
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 app.use(function (err, req, res, next) {
