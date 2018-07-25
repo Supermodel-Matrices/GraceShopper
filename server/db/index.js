@@ -1,10 +1,14 @@
-const Sequelize = require('sequelize');
+const db = require('./db');
 const Product = require('./Product');
+const Order = require('./Order');
+const User = require('./User');
 
+Order.belongsTo(User);
+User.hasMany(Order);
 
-const db = new Sequelize('postgres://localhost:5432/graceshopper', {
-  logging: false // unless you like the logs
-  // ...and there are many other options you may want to play with
-});
-
-module.exports = { db, Product };
+module.exports = {
+    db,
+    User,
+    Product,
+    Order,
+};
