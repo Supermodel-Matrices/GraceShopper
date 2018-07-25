@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const { Product } = require('../db');
 
-// matches GET requests to /api/puppies/
-router.get('/api/products', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const allProducts = await Product.findAll();
     res.send(allProducts);
@@ -11,6 +10,7 @@ router.get('/api/products', async (req, res, next) => {
   }
 });
 
+<<<<<<< HEAD
 router.get('/api/products/:id', async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -21,3 +21,6 @@ router.get('/api/products/:id', async (req, res, next) => {
 });
 
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> 25801d2f3d0f7c99b537c55e84e50011fcd2c07a

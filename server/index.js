@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // app.use('/auth', require('./auth'))
 
-app.use('/', require('./api/products.js'));
+app.use('/api', require('./api/'));
 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
