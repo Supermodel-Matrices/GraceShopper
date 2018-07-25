@@ -6,10 +6,6 @@ const Order = db.define('order', {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
-    orders: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER),
-        allowNull: false,
-    },
 });
 
 module.exports = Order;
