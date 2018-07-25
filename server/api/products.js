@@ -10,4 +10,13 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/api/products/:id', async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
