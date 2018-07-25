@@ -1,11 +1,9 @@
-const { db } = require('../server/db/index');
+const {db} = require('../server/db/index');
 const User = require('../server/db/User');
 const Product = require('../server/db/Product');
 const Order = require('../server/db/Order');
 
-console.log(db.models)
-
-const { ordered_products: OrderedProducts } = db.models
+const { ordered_products: OrderedProducts } = db.models;
 
 const users = [
   { name: 'Alex Roger', email: 'atown@email.com', password: '123S' },
@@ -52,7 +50,7 @@ const orderedproducts = [
     orderId: 2,
     productId: 5
   },
-]
+];
 
 const seed = () =>
   Promise.all(users.map(user =>
