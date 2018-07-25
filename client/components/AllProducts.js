@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
-<<<<<<< HEAD
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products';
 import { Link } from 'react-router-dom'
-=======
-import {connect} from 'react-redux';
-import {fetchProducts} from '../store/products';
-// import { Link } from 'react-router-dom'
->>>>>>> 25801d2f3d0f7c99b537c55e84e50011fcd2c07a
 
 class AllProducts extends Component {
   
