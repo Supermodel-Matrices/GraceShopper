@@ -9,6 +9,7 @@
   "scripts": {
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
+    "start": "node main.js",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon main.js -e html,js,scss --ignore public --ignore client",
     "deploy": "script/deploy",
