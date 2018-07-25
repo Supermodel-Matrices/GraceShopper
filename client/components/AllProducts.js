@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products';
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class AllProducts extends Component {
   
@@ -15,7 +15,13 @@ class AllProducts extends Component {
       <div>
 				<ul>
         {this.props.allProducts.map(product => 
-          <li key={product.id}>{product.name}</li>
+          <Link to={`/products/${product.id}`} key={product.id}>
+            <div>
+              <img src={product.image} />
+              <h4>{product.name}</h4>
+              <p>{product.price}</p>
+            </div>
+          </Link>
 				)}
 				</ul>
 			</div> :
@@ -25,7 +31,7 @@ class AllProducts extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  allProducts: state.products
+  allProducts: state.products.allProducts
 })
 
 const mapDispatchToProps = (dispatch) => ({
