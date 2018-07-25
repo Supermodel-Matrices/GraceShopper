@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "webpack -w & nodemon main.js"
+    "start-dev": "webpack -w & nodemon main.js",
+    "deploy": "deploy"
   },
   "repository": {
     "type": "git",
