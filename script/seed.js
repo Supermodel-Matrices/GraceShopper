@@ -3,6 +3,12 @@ const User = require('../server/db/User');
 const Product = require('../server/db/Product');
 const Order = require('../server/db/Order');
 
+Order.belongsTo(User);
+User.hasMany(Order);
+
+Order.belongsToMany(Product, {through: 'ordered_products'});
+Product.belongsToMany(Order, {through: 'ordered_products'});
+
 const users = [
   { name: 'Alex Roger', email: 'atown@email.com', password: '123S' },
   { name: 'Magic Fodder', email: 'btown@email.com', password: '123S' },
