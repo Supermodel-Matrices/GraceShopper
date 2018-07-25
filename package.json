@@ -2,11 +2,17 @@
   "name": "graceshopper",
   "version": "1.0.0",
   "description": "An e-commerce site for purchasing home decor items",
-  "main": "main.js",
+  "engines": {
+    "node": ">= 7.0.0"
+  },
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "webpack -w & nodemon main.js",
-    "deploy": "deploy"
+    "build-client": "webpack",
+    "build-client-watch": "webpack -w",
+    "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
+    "start-server": "nodemon main.js -e html,js,scss --ignore public --ignore client",
+    "deploy": "script/deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -38,6 +44,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "nodemon": "^1.18.3",
+    "path": "^0.12.7",
     "pg": "^7.4.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
