@@ -1,16 +1,12 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import axios from 'axios';
+import { productReducer } from './products';
+import { combineReducers } from 'redux';
 
-const initialState = {};
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
+const reducer = combineReducers({
+  products: productReducer,
+});
 
 const store = createStore(
   reducer,

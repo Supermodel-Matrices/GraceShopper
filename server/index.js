@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // app.use('/auth', require('./auth'))
 
-// app.use('/api/products', require('./products'));
+app.use('/api', require('./api/'));
 
 app.use(function (req, res, next) {
   const err = new Error('Not found.');
