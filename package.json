@@ -1,0 +1,42 @@
+{
+  "name": "graceshopper",
+  "version": "1.0.0",
+  "description": "An e-commerce site for purchasing home decor items",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-dev": "webpack -w & nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Supermodel-Matrices/GraceShopper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Supermodel-Matrices/GraceShopper/issues"
+  },
+  "homepage": "https://github.com/Supermodel-Matrices/GraceShopper#readme",
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1"
+  }
+}
