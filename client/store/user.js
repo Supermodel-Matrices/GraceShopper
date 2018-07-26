@@ -22,3 +22,8 @@ export const login = (formData) => async dispatch => {
 	const response = await axios.put('/auth/login', formData);
 	dispatch(loginUser(response.data));
 };
+
+export const signup = (formData) => async dispatch => {
+	const response = await axios.post('/auth/signup', formData);
+	dispatch(loginUser(response.data));
+}
