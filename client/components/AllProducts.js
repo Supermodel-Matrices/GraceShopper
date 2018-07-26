@@ -11,23 +11,26 @@ export class AllProducts extends Component {
 
   render () {
     return (
-      <div className='product-container'>
-      {this.props.allProducts.length ?
-				<ul className='product-list'>
-        {this.props.allProducts.map(product =>
-          <Link to={`/products/${product.id}`} key={product.id}>
-            <div className='product-preview'>
-              <img src={product.image} />
-              <p>{product.name}</p>
-              <p>{product.price} USD</p>
-            </div>
-          </Link>
-				)}
-				</ul>
-			:
-			<h1>No products now!</h1>
-      }
-      </div>
+      <React.Fragment>
+        {this.props.allProducts.length
+        ?
+        <ul className="product-list">
+          {this.props.allProducts.map(product =>
+            (
+            <Link to={`/products/${product.id}`} key={product.id}>
+              <div className="product-preview">
+                <img src={product.image} />
+                <p>{product.name}</p>
+                <p>{product.price} USD</p>
+              </div>
+            </Link>
+            ))
+          }
+        </ul>
+        :
+        <h1>No products now!</h1>
+        }
+      </React.Fragment>
     )
   }
 }

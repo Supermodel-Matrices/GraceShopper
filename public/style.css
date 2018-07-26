@@ -7,21 +7,51 @@ body {
 }
 
 #main {
-  display: flex;
+  /* display: flex; */
   justify-content: flex-end;
 }
 
 #navbar {
-  flex: 1
+  position: fixed;
+  flex: 1;
+  padding: 50px 20px;
+  height: 100vh;
 }
 
 #component {
-  flex: 3
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.product-container {
+#homeIcon {
+  padding: 30px 70px;
+  font-size: 30px;
+}
+
+.cartIcon {
+  width: 30px;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 70px;
+  font-size: 20px;
+  margin-bottom: 100px;
+}
+
+#userMenu {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 70px;
+}
+
+.container {
   width: 60%;
-  align-content: right;
+  float: right;
+  margin-right: 50px;
 }
 
 .product-list {
@@ -42,6 +72,7 @@ img {
 }
 
 a, a:hover, a:active, a:visited {
+  padding: 20px;
   color: #333138;
   text-decoration: none;
 }
