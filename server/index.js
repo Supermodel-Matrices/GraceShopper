@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const session = require('express-session')
+const session = require('express-session');
 
 const app = express();
 
@@ -11,9 +11,15 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(session({
+  secret: 'hahaha',
+  resave: false,
+  saveUninitialized: false
+}));
+
 app.use(express.static(path.join(__dirname, '../public')));
 
-// app.use('/auth', require('./auth'))
+app.use('/auth', require('./auth'));
 
 app.use('/api', require('./api/'));
 
