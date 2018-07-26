@@ -21,7 +21,7 @@ export const addItemToCart = (cartItem) => ({
 export const removeItemFromCart = (cartItemId) => ({
     type: REMOVE_ITEM_FROM_CART,
     cartItemId,
-})
+});
 
 //Reducer
 export const cartReducer = (state = initialState, action) => {

@@ -15,11 +15,10 @@ class CartPage extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchCartItems()
+        this.props.fetchCartItems();
     }
 
     render() {
-        console.log(this.props.cart)
         return (
             <React.Fragment>
                 <h1>Your Shopping Cart</h1>
