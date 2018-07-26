@@ -1,26 +1,24 @@
 import axios from 'axios';
 
-const FETCH_USER = 'FETCH_USER';
+const LOGIN_USER = 'LOGIN_USER';
 
 const initialState = {};
 
-const getUser = (user) => ({
-  type: FETCH_USER,
-      user
-});
-
-export const fetchUser = () => {
-  return async () => {
-    const user = await axios.get('/api/user/:id');
-    dispatch(getUser(user.data));
-  }
-};
-
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_USER:
-      return {...state, user: action.user}
-    default:
-      return state;
-  }
+		case LOGIN_USER:
+			return action.user;
+		default:
+		  return state;
+	}
+};
+
+const loginUser = (user) => ({
+	type: LOGIN_USER,
+	user
+});
+
+export const login = (formData) => async dispatch => {
+	const response = await axios.put('/auth/login', formData);
+	dispatch(loginUser(response.data));
 };

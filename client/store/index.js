@@ -1,25 +1,22 @@
-import {createStore, applyMiddleware} from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import {createLogger} from 'redux-logger';
-import {userReducer} from './user';
-import {productReducer} from './products';
-import {combineReducers} from 'redux';
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import {productReducer } from './products';
-import {cartReducer } from './cart';
+import {productReducer} from './products';
+import {cartReducer} from './cart';
+import {userReducer} from './user';
+import createLogger from 'redux-logger';
 
 const reducer = combineReducers({
   products: productReducer,
   cart: cartReducer,
+  user: userReducer
 });
 
 const store = createStore(
   reducer,
   applyMiddleware(
-    thunkMiddleware
+    thunkMiddleware,
+    createLogger({collapsed: true})
   )
 );
 
 export default store;
-
