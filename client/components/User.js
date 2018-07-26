@@ -3,7 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import Order from './Order';
 
-class User extends Component {
+export class User extends Component {
   constructor () {
     super();
     this.state = {

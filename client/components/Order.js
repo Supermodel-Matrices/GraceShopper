@@ -2,16 +2,16 @@ import React from 'react';
 
 const Order = (props) => (
   <div>
-    <p>Order # {props.order.id}</p>
-    <p>Total: ${props.order.total}</p>
-    <p>
+    <span>Order # {props.order.id}</span>
+    <span>Total: ${props.order.total}</span>
+    <span>
       {props.order.orderProducts.map(product => (
         <div key={product.id}>
           <img src={product.image} />
-          <p>{product.name}</p>
+          <span>{product.name}</span>
         </div>
       ))}
-    </p>
+    </span>
   </div>
 )
 
