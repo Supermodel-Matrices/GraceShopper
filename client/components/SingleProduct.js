@@ -1,35 +1,33 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchProduct } from '../store/products';
-import { Link } from 'react-router-dom'
 
-class SingleProduct extends Component {
+export class SingleProduct extends Component {
   componentDidMount () {
 		this.props.fetchProduct(this.props.match.params.id);
-		console.log(this.props.match.params.id);
   }
 
   render () {
 		const product = this.props.product
     return (
       product ?
-			<div>
-				<h1>{product.name}</h1>
-				<img src={product.image} />
+			<div className='single-product'>
+				<p>{product.name}</p>
 				<p>{product.description}</p>
-				<p>{product.price}</p>
+				<p>{product.price} USD</p>
+				<img className='single-product-image' src={product.image} />
 			</div> :
 			null
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
   product: state.products.currentProduct
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   fetchProduct: (id) => dispatch(fetchProduct(id))
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);

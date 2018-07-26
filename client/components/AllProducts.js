@@ -3,29 +3,31 @@ import {connect} from 'react-redux';
 import {fetchProducts} from '../store/products';
 import {Link} from 'react-router-dom'
 
-class AllProducts extends Component {
-  
+export class AllProducts extends Component {
+
   componentDidMount () {
     this.props.fetchProducts();
   }
 
   render () {
     return (
-      this.props.allProducts.length ?
-      <div>
-				<ul>
-        {this.props.allProducts.map(product => 
+      <div className='product-container'>
+      {this.props.allProducts.length ?
+				<ul className='product-list'>
+        {this.props.allProducts.map(product =>
           <Link to={`/products/${product.id}`} key={product.id}>
-            <div>
+            <div className='product-preview'>
               <img src={product.image} />
-              <h4>{product.name}</h4>
-              <p>{product.price}</p>
+              <p>{product.name}</p>
+              <p>{product.price} USD</p>
             </div>
           </Link>
 				)}
 				</ul>
-			</div> :
-			<div><h1>No products now!</h1></div>
+			:
+			<h1>No products now!</h1>
+      }
+      </div>
     )
   }
 }
