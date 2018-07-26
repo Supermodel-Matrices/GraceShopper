@@ -15,7 +15,7 @@ const Main = () => {
 			  <div id="navbar">
 					<NavBar />
 				</div>
-				<div id="component">
+				<div className="container">
 					<Switch>
 						<Route exact path="/" component={AllProducts} />
 						<Route exact path="/products" component={AllProducts} />
