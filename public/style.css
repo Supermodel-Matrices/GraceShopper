@@ -11,6 +11,14 @@ body {
   justify-content: flex-end;
 }
 
+#navbar {
+  flex: 1
+}
+
+#component {
+  flex: 3
+}
+
 .product-container {
   width: 60%;
   align-content: right;

@@ -21,7 +21,7 @@ class User extends Component {
 
   render () {
     return (
-      <div>
+      <div className='user-container'>
       <h1>{this.state.user.name}</h1>
       <p>Email: {this.state.user.email}</p>
       <div>

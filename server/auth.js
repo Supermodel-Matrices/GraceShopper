@@ -20,3 +20,13 @@ router.put('/login', async (req, res, next) => {
 		next(err);
 	}
 });
+
+router.post('/signup', async (req, res, next) => {
+	try {
+		const user = await User.create(req.body);
+		res.status(204).json(user);
+	}
+	catch (err) {
+		next(err);
+	}
+});

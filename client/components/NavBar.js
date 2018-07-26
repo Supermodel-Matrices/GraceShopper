@@ -16,10 +16,8 @@ const NavBar = (props) => {
 			</nav>
 
 			{props.user.id ?
-			<Link to="/user">Hi {props.user.name}!</Link>
-			:
-			<span><Link to="/login">Login</Link> / <Link to="/signup">Signup</Link></span>
-			}
+			<Link to={`/user/${props.user.id}`}>Hi {props.user.name}!</Link> :
+			<span><Link to="/login">Login</Link> / <Link to="/signup">Signup</Link></span>}
 			<Link to="/contact">Contact</Link>
 
 		</div>
