@@ -19,6 +19,7 @@ class CartPage extends Component {
     }
 
     render() {
+        console.log(this.props.cart)
         return (
             <React.Fragment>
                 <h1>Your Shopping Cart</h1>
@@ -48,7 +49,7 @@ class CartPage extends Component {
     }
 }
 
-const mapToState = state => ({
+const mapToState = (state) => ({
     cart: state.cart,
 });
 
