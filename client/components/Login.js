@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {login} from '../store/auth';
+import {login} from '../store/user';
 
 class Login extends Component {
 	constructor () {
@@ -17,7 +17,7 @@ class Login extends Component {
 	}
 	handleSubmit (evt) {
 		evt.preventDefault();
-		login(this.state);
+		this.props.login(this.state);
 	}
 
 	render () {

@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 const NavBar = (props) => {
@@ -14,11 +15,15 @@ const NavBar = (props) => {
 				<Link to="/cart"><img src="carticonhere" /></Link>
 			</nav>
 
-			<Link to="/login">Login</Link> / <Link to="/signup">Signup</Link>
+			{props.user.id ? <Link to={`/user/${props.user.id}`}>Hi {props.user.name}!</Link> : <Link to="/login">Login</Link> / <Link to="/signup">Signup</Link>}
 			<Link to="/contact">Contact</Link>
 
 		</div>
 	);
 }
 
-export default NavBar;
+const mapStateToProps = (state) => ({
+	user: state.user
+});
+
+export default connect(mapStateToProps)(NavBar);
