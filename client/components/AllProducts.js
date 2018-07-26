@@ -24,7 +24,7 @@ export class AllProducts extends Component {
               <p>{product.price} USD</p>
             </div>
           </Link>
-          <button type="button" onClick={() => this.props.addItemToCart(product)}>Add To Cart</button>
+          <button type="button" onClick={() => this.props.addItemToCart(product.id)}>Add To Cart</button>
          </div>))}
 				</ul>
 			:
@@ -41,7 +41,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchProducts: () => dispatch(fetchProducts()),
-  addItemToCart: (product) => dispatch(addItemToCart(product)),
+  addItemToCart: (productId) => dispatch(addItemToCart(productId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
