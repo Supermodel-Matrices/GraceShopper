@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchProduct } from '../store/products';
-import { Link } from 'react-router-dom'
 
-class SingleProduct extends Component {
+export class SingleProduct extends Component {
   componentDidMount () {
 		this.props.fetchProduct(this.props.match.params.id);
-		console.log(this.props.match.params.id);
   }
 
   render () {
