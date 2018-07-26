@@ -11,23 +11,23 @@ export class SingleProduct extends Component {
 		const product = this.props.product
     return (
       product ?
-			<div>
-				<h1>{product.name}</h1>
-				<img src={product.image} />
+			<div className='single-product'>
+				<p>{product.name}</p>
 				<p>{product.description}</p>
-				<p>{product.price}</p>
+				<p>{product.price} USD</p>
+				<img className='single-product-image' src={product.image} />
 			</div> :
 			null
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
   product: state.products.currentProduct
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   fetchProduct: (id) => dispatch(fetchProduct(id))
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);
