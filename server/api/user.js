@@ -1,14 +1,13 @@
 const router = require('express').Router();
-const {User, Order, Product} = require('../db/index');
+const {User, Order} = require('../db/index');
 
 router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findOne({
       include: [{
           model: Order,
-          as: 'orders',
           include: [{
-              model: Product
+              association: 'orderProducts'
             }]
         }],
       where: {
