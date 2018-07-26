@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import AllProducts from './AllProducts';
+import User from './User';
 import SingleProduct from './SingleProduct';
 import CartPage from './CartPage';
 import NavBar from './NavBar';
@@ -19,6 +20,7 @@ const Main = () => {
 						<Route exact path="/" component={AllProducts} />
 						<Route exact path="/products" component={AllProducts} />
 						<Route exact path="/products/:id" component={SingleProduct} />
+						<Route exact path="/user/:id" component={User} />
 						<Route exact path="/cart" component={CartPage} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/signup" component={Signup} />
