@@ -12,7 +12,7 @@ const NavBar = (props) => {
 				<Link to="/products/greenery">Greenery</Link>
 				<Link to="/products/textiles">Textiles</Link>
 				<Link to="/products/walldecor">Wall Decor</Link>
-				<Link to="/cart"><img src="carticonhere" /></Link>
+				<Link to="/cart"><h1>{props.cart.length}</h1><img src="carticonhere" /></Link>
 			</nav>
 
 			{props.user.id ? <Link to={`/user/${props.user.id}`}>Hi {props.user.name}!</Link> : <Link to="/login">Login</Link> / <Link to="/signup">Signup</Link>}
@@ -23,7 +23,8 @@ const NavBar = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-	user: state.user
+	user: state.user,
+	cart: state.cart.cart
 });
 
 export default connect(mapStateToProps)(NavBar);

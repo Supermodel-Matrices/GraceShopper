@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getCartItems, removeItemFromCart } from '../store/cart';
 
 class CartPage extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
             subtotal: 0,
@@ -15,7 +15,7 @@ class CartPage extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchCartItems();
+        this.props.getCartItems();
     }
 
     render() {
@@ -23,20 +23,20 @@ class CartPage extends Component {
             <React.Fragment>
                 <h1>Your Shopping Cart</h1>
                 <div>
-                    <ul>
-                    {this.props.cart.length ?
-                        this.props.cart.map(product =>
-                        <Link to={`/products/${product.id}`} key={product.id}>
-                            <div>
-                            <img src={product.image} />
-                            <h4>{product.name}</h4>
-                            <p>{product.price}</p>
-                            <a onClick={() => removeItemFromCart(product.id)}></a>
-                            </div>
-                            {/*Quantity Adjustment Menu*/}
-                        </Link> ) :
-                        <li>No Items Currently In Your Cart</li>}
-                    </ul>
+                        {this.props.cart.length ?
+                            this.props.cart.map(product =>
+                                (<div key={product.id}>
+                                    <Link to={`/products/${product.id}`}>
+                                        <div>
+                                            <img src={product.image} />
+                                            <h4>{product.name}</h4>
+                                            <p>{product.price}</p>
+                                        </div>
+                                        {/*Quantity Adjustment Menu*/}
+                                    </Link>
+                                    <button type="button" onClick={() => this.props.removeItemFromCart(product.id)}>Remove</button>
+                                 </div>)) :
+                            <h1>No Items Currently In Your Cart</h1>}
                 </div>
                 <h3>Subtotal: {this.state.subtotal} </h3>
                 <h3>Tax: {this.state.tax}</h3>
@@ -49,11 +49,12 @@ class CartPage extends Component {
 }
 
 const mapToState = (state) => ({
-    cart: state.cart,
+    cart: state.cart.cart,
 });
 
 const mapToDispatch = dispatch => ({
-    fetchCartItems: () => dispatch(getCartItems()),
+    getCartItems: () => dispatch(getCartItems()),
+    removeItemFromCart: (productId) => dispatch(removeItemFromCart(product))
 });
 
 export default connect(mapToState, mapToDispatch)(CartPage);
