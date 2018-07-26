@@ -19,12 +19,12 @@ export const productReducer = (state = initialState, action) => {
 	}
 }
 
-const getProducts = (products) => ({
+export const getProducts = (products) => ({
 	type: FETCH_PRODUCTS,
 	products
 });
 
-const getProduct = (product) => ({
+export const getProduct = (product) => ({
 	type: FETCH_PRODUCT,
 	product
 });
