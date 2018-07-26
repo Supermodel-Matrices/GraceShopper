@@ -1,10 +1,11 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { productReducer } from './products';
-import { combineReducers } from 'redux';
+import { cartReducer } from './cart';
 
 const reducer = combineReducers({
   products: productReducer,
+  cart: cartReducer,
 });
 
 const store = createStore(
@@ -15,3 +16,4 @@ const store = createStore(
 );
 
 export default store;
+ 
