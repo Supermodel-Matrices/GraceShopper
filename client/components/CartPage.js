@@ -17,6 +17,7 @@ class CartPage extends Component {
 			cartItems: []
 		};
 		this.getItem = this.getItem.bind(this);
+		this.removeItem = this.removeItem.bind(this);
 	}
 
 	//Function
@@ -38,6 +39,11 @@ class CartPage extends Component {
 		}
 	}
 
+	removeItem(id) {
+		store.dispatch(removeItemFromCart(id));
+		this.setState({cartItems: this.state.cartItems.filter(item => item.id !== id)});
+	}
+
 	render() {
 		return (
 			<div className="singlePanel">
@@ -55,7 +61,7 @@ class CartPage extends Component {
 									<p>{item.price} USD</p>
 								</div>
 							</Link>
-							<button type="button" onClick={() => this.props.removeItemFromCart(item.id)}>Remove</button>
+							<button type="button" onClick={() => this.removeItem(item.id)}>Remove</button>
 					  </div>
 						))
 					:
@@ -82,8 +88,7 @@ const mapToState = (state) => ({
 });
 
 const mapToDispatch = dispatch => ({
-    getCartItems: () => dispatch(getCartItems()),
-    removeItemFromCart: (id) => dispatch(removeItemFromCart(id))
+    getCartItems: () => dispatch(getCartItems())
 });
 
 export default connect(mapToState, mapToDispatch)(CartPage);
