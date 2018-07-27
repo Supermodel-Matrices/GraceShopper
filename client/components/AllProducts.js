@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../store/products';
 import {Link} from 'react-router-dom'
+import {addItemToCart} from '../store/cart';
 
 export class AllProducts extends Component {
 
@@ -16,16 +17,17 @@ export class AllProducts extends Component {
         ?
         <ul className="product-list">
           {this.props.allProducts.map(product =>
-            (
-            <Link to={`/products/${product.id}`} key={product.id}>
-              <div className="product-preview">
-                <img src={product.image} />
-                <p>{product.name}</p>
-                <p>{product.price} USD</p>
-              </div>
-            </Link>
-            ))
-          }
+            (<div key={product.id}>
+              <Link to={`/products/${product.id}`}>
+                <div className="product-preview">
+                  <img src={product.image} />
+                  <p>{product.name}</p>
+                  <p>{product.price} USD</p>
+                </div>
+              </Link>
+              <button type="button" onClick={() => this.props.addItemToCart(product.id)}>Add To Cart</button>
+            </div>
+          ))}
         </ul>
         :
         <h1>No products now!</h1>
@@ -40,7 +42,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchProducts: () => dispatch(fetchProducts())
+  fetchProducts: () => dispatch(fetchProducts()),
+  addItemToCart: (productId) => dispatch(addItemToCart(productId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)

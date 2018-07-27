@@ -25,7 +25,7 @@ class Signup extends Component {
 
 	render () {
 		return (
-			<div>
+			<div className="singlePanel">
 				<form onSubmit={this.handleSubmit}>
 					<div>
 						<label htmlFor="name">Username</label>

@@ -22,7 +22,7 @@ class Login extends Component {
 
 	render () {
 		return (
-			<div>
+			<div className="singlePanel">
 				<form onSubmit={this.handleSubmit}>
 					<div>
 						<label htmlFor="email">Email</label>

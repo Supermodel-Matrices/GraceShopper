@@ -63,6 +63,28 @@ nav {
   text-align: right;
 }
 
+.singlePanel {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: auto;
+  padding: 50px 70px;
+  font-size: 20px;
+}
+
+.single-product {
+  padding: 20px;
+}
+
+.single-product-image {
+  float: right
+}
+
+.title {
+  padding: 20px;
+  margin: 20px;
+}
+
 .product-preview {
   margin: 4%;
 }
