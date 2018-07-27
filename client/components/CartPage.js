@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCartItems, removeItemFromCart } from '../store/cart';
 
-class CartPage extends Component {
+export class CartPage extends Component {
     constructor(){
         super()
         this.state = {
