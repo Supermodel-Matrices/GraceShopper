@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
+import {logoutUser} from '../store/user';
 
 const NavBar = (props) => {
 	return (
@@ -18,7 +19,10 @@ const NavBar = (props) => {
 			</div>
 			<div className="nav-bottom">
 				{props.user.id ?
-				<Link to={`/user/${props.user.id}`}>Hi {props.user.name}!</Link> :
+				<div>
+					<Link to={`/user/${props.user.id}`}>Hi {props.user.name}!</Link>
+					<button onClick={props.logout}>Log out</button> 
+				</div> :
 				<span><Link to="/login">Login</Link> / <Link to="/signup">Signup</Link></span>}
 				<Link to="/contact">Contact</Link>
 			</div>
@@ -30,5 +34,11 @@ const mapStateToProps = (state) => ({
 	user: state.user,
 	cart: state.cart.cart
 });
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  logout: () => {
+		dispatch(logoutUser());
+		ownProps.history.push('/');
+	}
+});
 
-export default connect(mapStateToProps)(NavBar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));
