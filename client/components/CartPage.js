@@ -12,12 +12,13 @@ class CartPage extends Component {
 		this.state = {
 			subtotal: 0,
 			tax: 0,
-			shipping: 0,
+			shipping: 3,
 			total: 0,
 			cartItems: []
 		};
 		this.getItem = this.getItem.bind(this);
 		this.removeItem = this.removeItem.bind(this);
+		this.calculatePrices = this.calculatePrices.bind(this);
 	}
 
 	//Function
@@ -30,49 +31,68 @@ class CartPage extends Component {
 	async componentDidMount() {
 		store.dispatch(getLoggedInUser());
 		if (this.props.user.id) {
-      const cartItems = [];
+			const cartItems = [];
 			for (let i = 0; i < this.props.cartKeys.length; i++) {
 				const product = await this.getItem(this.props.cartKeys[i]);
-				cartItems.push(product);
+				cartItems.push({ product: product, quantity: this.props.cart[this.props.cartKeys[i]] });
 			}
 			this.setState({ cartItems: cartItems })
 		}
+		this.calculatePrices(this.state.cartItems);
 	}
 
 	removeItem(id) {
 		store.dispatch(removeItemFromCart(id));
-		this.setState({cartItems: this.state.cartItems.filter(item => item.id !== id)});
+		let newCart = this.state.cartItems;
+		newCart.map(item => {
+			if (item.product.id === id) {
+				item.quantity--;
+			}
+		});
+		this.setState({ cartItems: newCart });
+		this.calculatePrices(this.state.cartItems);
+	}
+
+	calculatePrices(cartItems) {
+		const newSubtotal = cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0);
+		const newTax = cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0) * .15;
+		this.setState({
+			subtotal: newSubtotal,
+			tax: newTax,
+			total: newSubtotal + newTax,
+		});
 	}
 
 	render() {
 		return (
 			<div className="right-panel">
-			  <div className="title">
+				<div className="title">
 					<h1>Your Shopping Cart</h1>
-			  </div>
+				</div>
 				<div>
 					{this.state.cartItems.length ?
-					this.state.cartItems.map(item =>
-						(<div key={item.id}>
-							<Link to={`/products/${item.id}`}>
-								<div>
-									<img src={item.image} />
-									<h4>{item.name}</h4>
-									<p>{item.price} USD</p>
-								</div>
-							</Link>
-							<button className="btn-main" type="button" onClick={() => this.removeItem(item.id)}>Remove</button>
-					  </div>
-						))
-					:
-					<h1>No Items Currently In Your Cart</h1>
+						this.state.cartItems.map(item =>
+							(<div key={item.product.id}>
+								<Link to={`/products/${item.product.id}`}>
+									<div>
+										<img src={item.product.image} />
+										<h4>{item.product.name}</h4>
+										<p>{item.product.price} USD</p>
+										<p>Q: {item.quantity}</p>
+									</div>
+								</Link>
+								<button className="btn-main" type="button" onClick={() => this.removeItem(item.product.id)}>Remove</button>
+							</div>
+							))
+						:
+						<h1>No Items Currently In Your Cart</h1>
 					}
 				</div>
 				<div className="cartInfo">
-					<h3>Subtotal: {this.state.subtotal} </h3>
-					<h3>Tax: {this.state.tax}</h3>
-					<h3>Shipping: {this.state.shipping} </h3>
-					<h2>Total: {this.state.total}</h2>
+					<h3>Subtotal: &#36;{this.state.subtotal}</h3>
+					<h3>Tax: &#36;{this.state.tax}</h3>
+					<h3>Shipping: &#36;{this.state.shipping} </h3>
+					<h2>Total: &#36;{this.state.total ? this.state.total + this.state.shipping : 0}</h2>
 				</div>
 				<Link to="/cart/checkout" >checkout</Link>
 			</div>
@@ -81,15 +101,16 @@ class CartPage extends Component {
 }
 
 const mapToState = (state) => ({
-	  user: state.user,
-    cart: state.cart,
-    cartKeys: Object.keys(state.cart),
-    product: state.products.currentProduct,
+	user: state.user,
+	cart: state.cart,
+	cartKeys: Object.keys(state.cart),
+	product: state.products.currentProduct,
 });
 
 const mapToDispatch = dispatch => ({
-    getCartItems: () => dispatch(getCartItems())
+	getCartItems: () => dispatch(getCartItems())
 });
 
 export default connect(mapToState, mapToDispatch)(CartPage);
+
 
