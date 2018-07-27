@@ -22,18 +22,18 @@ class Login extends Component {
 
 	render () {
 		return (
-			<div className="singlePanel">
-				<form onSubmit={this.handleSubmit}>
-					<div>
-						<label htmlFor="email">Email</label>
+			<div className="right-panel">
+				<form className="form-main" onSubmit={this.handleSubmit}>
+					<div className="form-main-field">
+						<label htmlFor="email">email </label>
 						<input type="email" name="email" value={this.state.email} onChange={this.handleChange} />
 					</div>
-					<div>
-						<label htmlFor="password">Password</label>
+					<div className="form-main-field">
+						<label htmlFor="password">password </label>
 						<input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
 					</div>
 					<div>
-						<button type="submit" >Submit</button>
+						<button type="submit" className="btn-main">submit</button>
 					</div>
 				</form>
 			</div>

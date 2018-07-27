@@ -35,7 +35,7 @@ class CartPage extends Component {
 
 	render() {
 		return (
-			<div className="singlePanel">
+			<div className="right-panel">
 			  <div className="title">
 					<h1>Your Shopping Cart</h1>
 				</div>
@@ -50,7 +50,7 @@ class CartPage extends Component {
 									<p>{this.props.product.price}</p>
 								</div>
 							</Link>
-							<button type="button" onClick={() => this.props.removeItemFromCart(cart[cartKeys[i]].id)}>Remove</button>
+							<button type="button" className="btn-main" onClick={() => this.props.removeItemFromCart(cart[cartKeys[i]].id)}>Remove</button>
 					  </div>
 						))
 					:
