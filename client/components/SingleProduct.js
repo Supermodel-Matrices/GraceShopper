@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import { fetchProduct } from '../store/products';
+import {connect} from 'react-redux';
+import {fetchProduct} from '../store/products';
+import {addToCart} from '../store/cart';
 
 export class SingleProduct extends Component {
   componentDidMount () {
