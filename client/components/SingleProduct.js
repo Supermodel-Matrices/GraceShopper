@@ -11,12 +11,14 @@ export class SingleProduct extends Component {
 		const product = this.props.product
     return (
       product ?
-			<div className='single-product'>
-				<p>{product.name}</p>
-				<p>{product.description}</p>
-				<p>{product.price} USD</p>
-				<img className='single-product-image' src={product.image} />
-			</div> :
+      <div className="singlePanel">
+        <div className="single-product">
+          <p>{product.name}</p>
+          <p>{product.description}</p>
+          <p>{product.price} USD</p>
+          <img className="single-product-image" src={product.image} />
+        </div>
+      </div> :
 			null
     );
   }

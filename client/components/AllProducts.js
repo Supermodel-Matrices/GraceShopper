@@ -12,7 +12,7 @@ export class AllProducts extends Component {
 
   render () {
     return (
-      <div className='product-container'>
+      <React.Fragment>
         {this.props.allProducts.length
         ?
         <ul className="product-list">
@@ -32,7 +32,7 @@ export class AllProducts extends Component {
         :
         <h1>No products now!</h1>
         }
-      </div>
+      </React.Fragment>
     )
   }
 }
