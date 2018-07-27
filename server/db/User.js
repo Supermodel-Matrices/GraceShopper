@@ -28,6 +28,9 @@ const User = db.define('user', {
 			notEmpty: true
 		}
 	},
+	googleId: {
+    type: Sequelize.STRING
+  },
 	salt: {
     type: Sequelize.STRING
   }

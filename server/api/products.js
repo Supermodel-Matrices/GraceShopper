@@ -4,7 +4,7 @@ const { Product } = require('../db');
 router.get('/', async (req, res, next) => {
   try {
     const allProducts = await Product.findAll();
-    res.send(allProducts);
+    res.status(200).send(allProducts);
   } catch (err) {
     next(err);
   }
@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
-    res.json(product);
+    res.status(200).json(product);
   } catch (err) {
     next(err);
   }

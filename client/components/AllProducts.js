@@ -11,12 +11,18 @@ export class AllProducts extends Component {
   }
 
   render () {
+    let products
+    this.props.match.params.cat
+    ?
+    products = this.props.allProducts.filter(product => product.category === this.props.match.params.cat)
+    :
+    products = this.props.allProducts;
     return (
       <React.Fragment>
-        {this.props.allProducts.length
+        {products.length
         ?
         <ul className="product-list">
-          {this.props.allProducts.map(product => (
+          {products.map(product => (
             <div key={product.id}>
               <div className="product-preview">
                 <Link to={`/products/${product.id}`} className="undecorated-link">
@@ -34,7 +40,7 @@ export class AllProducts extends Component {
           ))}
         </ul>
         :
-        <h1>No products now!</h1>
+        <h1>No products available.</h1>
         }
       </React.Fragment>
     )
