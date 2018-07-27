@@ -33,7 +33,6 @@ router.post('/signup', async (req, res, next) => {
 				next(err);
 			}
 			else {
-				// req.session.userId = user.id;
 				res.json(user);}
 		});
 	}

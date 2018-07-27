@@ -14,7 +14,6 @@ export class User extends Component {
   }
 
   async componentDidMount () {
-    store.dispatch(getLoggedInUser());
     const user = await axios.get(`/api/user/${this.props.user.id}`);
     console.log(user);
     this.setState({

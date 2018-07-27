@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { getCartItems, removeItemFromCart } from '../store/cart';
-import { getLoggedInUser } from '../store/user';
+import { getCart, removeFromCart } from '../store/cart';
+// import { getLoggedInUser } from '../store/user';
 import store from '../store';
 
 class CartPage extends Component {
@@ -28,19 +28,27 @@ class CartPage extends Component {
 	}
 
 	async componentDidMount() {
-		store.dispatch(getLoggedInUser());
-		if (this.props.user.id) {
-      const cartItems = [];
-			for (let i = 0; i < this.props.cartKeys.length; i++) {
-				const product = await this.getItem(this.props.cartKeys[i]);
-				cartItems.push(product);
-			}
-			this.setState({ cartItems: cartItems })
+		// store.dispatch(getLoggedInUser());
+		// if (this.props.user.id) {
+    //   const cartItems = [];
+		// 	for (let i = 0; i < this.props.cartKeys.length; i++) {
+		// 		const product = await this.getItem(this.props.cartKeys[i]);
+		// 		cartItems.push(product);
+		// 	}
+		// 	this.setState({ cartItems: cartItems })
+		// }
+		const cartItems = [];
+		const cart = await this.props.getCart();
+		const cartKeys = Object.keys(cart);
+		for (let i = 0; i < cartKeys.length; i++) {
+			const product = await this.getItem(this.props.cartKeys[i]);
+			cartItems.push(product);
 		}
+		this.setState({ cartItems: cartItems })
 	}
 
 	removeItem(id) {
-		store.dispatch(removeItemFromCart(id));
+		this.props.removeFromCart(id);
 		this.setState({cartItems: this.state.cartItems.filter(item => item.id !== id)});
 	}
 
@@ -88,7 +96,8 @@ const mapToState = (state) => ({
 });
 
 const mapToDispatch = dispatch => ({
-    getCartItems: () => dispatch(getCartItems())
+		getCart: () => dispatch(getCart()),
+		removeFromCart: (id) => dispatch(removeFromCart(id))
 });
 
 export default connect(mapToState, mapToDispatch)(CartPage);
