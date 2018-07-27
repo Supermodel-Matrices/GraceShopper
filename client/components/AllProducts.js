@@ -16,16 +16,20 @@ export class AllProducts extends Component {
         {this.props.allProducts.length
         ?
         <ul className="product-list">
-          {this.props.allProducts.map(product =>
-            (<div key={product.id}>
-              <Link to={`/products/${product.id}`}>
-                <div className="product-preview">
+          {this.props.allProducts.map(product => (
+            <div key={product.id}>
+              <div className="product-preview">
+                <Link to={`/products/${product.id}`} className="undecorated-link">
                   <img src={product.image} />
-                  <p>{product.name}</p>
-                  <p>{product.price} USD</p>
+                </Link>
+                <div className="product-preview-details">
+                  <button type="button" className="btn-main" onClick={() => this.props.addItemToCart(product.id)}>+ Add</button>
+                  <Link to={`/products/${product.id}`} className="undecorated-link">
+                    <p>{product.name}</p>
+                    <p>{product.price} USD</p>
+                  </Link>
                 </div>
-              </Link>
-              <button type="button" onClick={() => this.props.addItemToCart(product.id)}>Add To Cart</button>
+              </div>
             </div>
           ))}
         </ul>

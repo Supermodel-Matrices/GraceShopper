@@ -4,19 +4,19 @@ import {Link} from 'react-router-dom';
 
 const NavBar = (props) => {
 	return (
-		<div id="component">
-			<div id="homeIcon">
-			  <Link to="/">CORMORANT</Link>
-			</div>
+		<div className="nav-container">
+			<div className="nav-top">
 			<nav>
+			  <Link className="home-link undecorated-link" to="/">CORMORANT</Link>
 				<Link to="/products">All</Link>
 				<Link to="/products/lighting">Lighting</Link>
 				<Link to="/products/greenery">Greenery</Link>
 				<Link to="/products/textiles">Textiles</Link>
 				<Link to="/products/walldecor">Wall Decor</Link>
-				<Link to="/cart"><img src="./cart.png" className="cartIcon" /></Link>
+				<Link to="/cart"><img src="./cart.png" className="cart-icon" /></Link>
 			</nav>
-			<div id="userMenu">
+			</div>
+			<div className="nav-bottom">
 				{props.user.id ?
 				<Link to={`/user/${props.user.id}`}>Hi {props.user.name}!</Link> :
 				<span><Link to="/login">Login</Link> / <Link to="/signup">Signup</Link></span>}
