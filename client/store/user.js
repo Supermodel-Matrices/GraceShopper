@@ -27,3 +27,9 @@ export const signup = (formData) => async dispatch => {
 	const response = await axios.post('/auth/signup', formData);
 	dispatch(loginUser(response.data));
 }
+
+export const getLoggedInUser = () => async dispatch => {
+	const response = await axios.get('auth/me');
+	const loggedInUser = response.data;
+	dispatch(loginUser(loggedInUser));
+}
