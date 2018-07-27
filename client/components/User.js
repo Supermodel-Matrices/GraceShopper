@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import Order from './Order';
+import store from '../store';
+import {getLoggedInUser} from '../store/user';
 
 export class User extends Component {
   constructor () {
@@ -12,6 +14,7 @@ export class User extends Component {
   }
 
   async componentDidMount () {
+    store.dispatch(getLoggedInUser());
     const user = await axios.get(`/api/user/${this.props.user.id}`);
     console.log(user);
     this.setState({
@@ -21,7 +24,7 @@ export class User extends Component {
 
   render () {
     return (
-      <div className='user-container'>
+      <div className="user-container">
       <h1>{this.state.user.name}</h1>
       <p>Email: {this.state.user.email}</p>
       <div>

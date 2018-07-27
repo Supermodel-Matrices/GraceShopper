@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { getCartItems, removeItemFromCart } from '../store/cart';
+import { getLoggedInUser } from '../store/user';
+import store from '../store';
 
 class CartPage extends Component {
 	constructor() {
@@ -15,22 +17,31 @@ class CartPage extends Component {
 			cartItems: []
 		};
 		this.getItem = this.getItem.bind(this);
+		this.removeItem = this.removeItem.bind(this);
 	}
 
 	//Function
 	async getItem(productId) {
-		const { data } = await axios.get(`/api/product/${productId}`);
+		const { data } = await axios.get(`/api/products/${productId}`);
 		const product = data;
 		return product;
 	}
 
 	async componentDidMount() {
-		const cartItems = [];
-		for (let i = 0; i < this.props.cartKeys.length; i++) {
-			const product = await this.getItem(this.props.cartKeys[i]);
-			cartItems.push(product);
+		store.dispatch(getLoggedInUser());
+		if (this.props.user.id) {
+      const cartItems = [];
+			for (let i = 0; i < this.props.cartKeys.length; i++) {
+				const product = await this.getItem(this.props.cartKeys[i]);
+				cartItems.push(product);
+			}
+			this.setState({ cartItems: cartItems })
 		}
-		this.setState({ cartItems: cartItems })
+	}
+
+	removeItem(id) {
+		store.dispatch(removeItemFromCart(id));
+		this.setState({cartItems: this.state.cartItems.filter(item => item.id !== id)});
 	}
 
 	render() {
@@ -38,19 +49,19 @@ class CartPage extends Component {
 			<div className="right-panel">
 			  <div className="title">
 					<h1>Your Shopping Cart</h1>
-				</div>
+			  </div>
 				<div>
 					{this.state.cartItems.length ?
 					this.state.cartItems.map(item =>
 						(<div key={item.id}>
-							<Link to={`/products/${cart[cartKeys[i]].id}`}>
+							<Link to={`/products/${item.id}`}>
 								<div>
-									<img src={this.props.product.image} />
-									<h4>{this.props.product.name}</h4>
-									<p>{this.props.product.price}</p>
+									<img src={item.image} />
+									<h4>{item.name}</h4>
+									<p>{item.price} USD</p>
 								</div>
 							</Link>
-							<button type="button" className="btn-main" onClick={() => this.props.removeItemFromCart(cart[cartKeys[i]].id)}>Remove</button>
+							<button className="btn-main" type="button" onClick={() => this.removeItem(item.id)}>Remove</button>
 					  </div>
 						))
 					:
@@ -70,14 +81,14 @@ class CartPage extends Component {
 }
 
 const mapToState = (state) => ({
+	  user: state.user,
     cart: state.cart,
     cartKeys: Object.keys(state.cart),
     product: state.products.currentProduct,
 });
 
 const mapToDispatch = dispatch => ({
-    getCartItems: () => dispatch(getCartItems()),
-    removeItemFromCart: (productId) => dispatch(removeItemFromCart(productId))
+    getCartItems: () => dispatch(getCartItems())
 });
 
 export default connect(mapToState, mapToDispatch)(CartPage);

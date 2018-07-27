@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../store/products';
 import {Link} from 'react-router-dom'
-import { addItemToCart } from '../store/cart';
+import {addItemToCart} from '../store/cart';
 
 export class AllProducts extends Component {
 
