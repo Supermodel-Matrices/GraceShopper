@@ -46,16 +46,20 @@ class CartPage extends Component {
 		let newCart = this.state.cartItems;
 		newCart.map(item => {
 			if (item.product.id === id) {
-				item.quantity--;
+				if (item.quantity === 1){
+					newCart = newCart.filter(item => item.product.id !== id)
+				} else {
+					item.quantity--;
+				}
 			}
 		});
 		this.setState({ cartItems: newCart });
-		this.calculatePrices(this.state.cartItems);
+		this.calculatePrices(newCart);
 	}
 
 	calculatePrices(cartItems) {
-		const newSubtotal = cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0);
-		const newTax = cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0) * .15;
+		const newSubtotal = cartItems.length ? cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0) : 0;
+		const newTax = cartItems.length ? cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0) * .15 : 0;
 		this.setState({
 			subtotal: newSubtotal,
 			tax: newTax,
