@@ -29,7 +29,7 @@ export const signup = (formData) => async dispatch => {
 }
 
 export const getLoggedInUser = () => async dispatch => {
-	const response = await axios.get('auth/me');
+	const response = await axios.get('/auth/me');
 	const loggedInUser = response.data;
 	dispatch(loginUser(loggedInUser));
 }
