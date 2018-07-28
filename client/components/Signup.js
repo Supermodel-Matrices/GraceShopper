@@ -3,12 +3,13 @@ import {connect} from 'react-redux';
 import {signup} from '../store/user';
 
 class Signup extends Component {
-	constructor () {
-		super();
+	constructor (props) {
+		super(props);
 		this.state = {
       name: '',
 			email: '',
-			password: ''
+			password: '',
+			cart: props.cart
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -51,10 +52,12 @@ class Signup extends Component {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-	  signup: (formData) => dispatch(signup(formData))
-	}
-}
+const mapStateToProps = (state) => ({
+		cart: state.cart
+});
 
-export default connect(null, mapDispatchToProps)(Signup);
+const mapDispatchToProps = (dispatch) => ({
+	  signup: (formData) => dispatch(signup(formData))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
