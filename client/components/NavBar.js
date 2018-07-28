@@ -21,7 +21,7 @@ const NavBar = (props) => {
 				{props.user.id ?
 				<div>
 					<Link to={`/user/${props.user.id}`}>Hi {props.user.name}!</Link>
-					<button onClick={props.logout}>Log out</button> 
+					<button onClick={props.logout}>Logout</button> 
 				</div> :
 				<span><Link to="/login">Login</Link> / <Link to="/signup">Signup</Link></span>}
 				<Link to="/contact">Contact</Link>
