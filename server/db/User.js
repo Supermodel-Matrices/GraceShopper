@@ -7,10 +7,10 @@ const Sequelize = require('sequelize');
 const User = db.define('user', {
 	name: {
 		type: Sequelize.STRING,
-		allowNull: false,
-		validate: {
-				notEmpty: true
-		}
+		// allowNull: false,
+		// validate: {
+		// 		notEmpty: true
+		// }
 	},
 	email: {
 		type: Sequelize.STRING,
@@ -23,20 +23,42 @@ const User = db.define('user', {
 	},
 	password: {
 		type: Sequelize.STRING,
-		allowNull: false,
+		// allowNull: false,
 		validate: {
 			notEmpty: true
 		}
 	},
+	googleId: {
+    type: Sequelize.STRING
+  },
 	salt: {
     type: Sequelize.STRING
-  }
+	},
+	cart: {
+		type: Sequelize.JSON,
+		defaultValue: {},
+	}
 }, {
   hooks: {
     beforeCreate: setSaltAndPassword,
     beforeUpdate: setSaltAndPassword
   }
 });
+
+User.prototype.addToCart = async function (id) {
+	const [updatedRow, updatedUser] = await User.update({cart: {...this.cart, [id]: this.cart[id] ? this.cart[id] + 1 : 1}}, {where: {id: this.id}, returning: true});
+	return updatedUser[0].cart;
+};
+User.prototype.removeFromCart = async function (id) {
+	if (this.cart[id] === 1) {
+		const {[id]: ignore, ...newCart} = this.cart;
+		const [updatedRow, updatedUser] = await User.update({cart: newCart}, {where: {id: this.id}, returning: true});
+		return updatedUser[0].cart
+	} else {
+		const [updatedRow, updatedUser] = await User.update({cart: {...this.cart, [id]: this.cart[id] - 1}}, {where: {id: this.id}, returning: true});
+	  return updatedUser[0].cart;
+	}
+};
 
 User.prototype.correctPassword = function (candidatePassword) {
   return User.encryptPassword(candidatePassword, this.salt) === this.password;

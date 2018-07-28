@@ -6,6 +6,12 @@ const session = require('express-session');
 const passport = require('passport');
 const {User} = require('./db');
 
+if (process.env.NODE_ENV !== 'production') {
+  require('../secrets');
+}
+
+// require('main');
+
 const app = express();
 
 app.use(morgan('dev'));
@@ -41,6 +47,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/auth', require('./auth'));
 
 app.use('/api', require('./api/'));
+
+app.use('/google', require('./oauth'));
 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'));

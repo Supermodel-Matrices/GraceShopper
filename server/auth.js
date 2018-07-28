@@ -33,7 +33,6 @@ router.post('/signup', async (req, res, next) => {
 				next(err);
 			}
 			else {
-				// req.session.userId = user.id;
 				res.json(user);}
 		});
 	}
@@ -73,3 +72,6 @@ router.delete('/logout', (req, res, next) => {
 router.get('/me', (req, res, next) => {
   res.json(req.user);
 });
+
+router.use('/google', require('./oauth'));
+
