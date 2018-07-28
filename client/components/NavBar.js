@@ -9,10 +9,10 @@ const NavBar = (props) => {
 			<nav>
 			  <Link className="home-link undecorated-link" to="/">CORMORANT</Link>
 				<Link to="/products">All</Link>
-				<Link to="/products/lighting">Lighting</Link>
-				<Link to="/products/greenery">Greenery</Link>
-				<Link to="/products/textiles">Textiles</Link>
-				<Link to="/products/walldecor">Wall Decor</Link>
+				<Link to="/products/category/ighting">Lighting</Link>
+				<Link to="/products/category/greenery">Greenery</Link>
+				<Link to="/products/category/textiles">Textiles</Link>
+				<Link to="/products/category/walldecor">Wall Decor</Link>
 				<Link to="/cart"><img src="./cart.png" className="cart-icon" /></Link>
 			</nav>
 			</div>
