@@ -48,6 +48,8 @@ app.use('/auth', require('./auth'));
 
 app.use('/api', require('./api/'));
 
+app.use('/google', require('./oauth'));
+
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
