@@ -43,6 +43,9 @@ class Signup extends Component {
 						<button type="submit" className="btn-main">submit</button>
 					</div>
 				</form>
+				<form className="form-main" method="get" action="/auth/google">
+					<button type="submit" className="btn-main">signup with google</button>
+				</form>
 			</div>
 		);
 	}

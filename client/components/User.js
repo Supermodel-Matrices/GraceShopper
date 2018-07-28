@@ -27,7 +27,7 @@ export class User extends Component {
       <h1>{this.state.user.name}</h1>
       <p>Email: {this.state.user.email}</p>
       <div>
-        {this.state.user.orders ?
+        {this.state.user.orders.length ?
           this.state.user.orders.map(order => (
           <Order key={order.id} order={order} />
           ))
