@@ -15,14 +15,9 @@ const NavBar = (props) => {
 				<Link to="/products/category/lighting">Lighting</Link>
 				<Link to="/products/category/greenery">Greenery</Link>
 				<Link to="/products/category/textiles">Textiles</Link>
-<<<<<<< HEAD
 				<Link to="/products/category/wall-decor">Wall Decor</Link>
-				<Link to="/cart"><img src="./cart.png" className="cart-icon" /></Link>
-=======
-				<Link to="/products/category/walldecor">Wall Decor</Link>
 				<Link to="/cart"><img src="./cart.png" className="cart-icon" /><span className="cart-count">{cartCount}</span>
 				</Link>
->>>>>>> 9d4533199b0f349396e5a4b8f89dfd8156b648da
 			</nav>
 			</div>
 			<div className="nav-bottom">
