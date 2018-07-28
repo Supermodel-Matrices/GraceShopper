@@ -6,6 +6,12 @@ const session = require('express-session');
 const passport = require('passport');
 const {User} = require('./db');
 
+if (process.env.NODE_ENV !== 'production') {
+  require('../secrets');
+}
+
+// require('main');
+
 const app = express();
 
 app.use(morgan('dev'));
