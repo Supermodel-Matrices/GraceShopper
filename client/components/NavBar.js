@@ -10,7 +10,7 @@ const NavBar = (props) => {
 			<nav>
 			  <Link className="home-link undecorated-link" to="/">CORMORANT</Link>
 				<Link to="/products">All</Link>
-				<Link to="/products/category/ighting">Lighting</Link>
+				<Link to="/products/category/lighting">Lighting</Link>
 				<Link to="/products/category/greenery">Greenery</Link>
 				<Link to="/products/category/textiles">Textiles</Link>
 				<Link to="/products/category/walldecor">Wall Decor</Link>
