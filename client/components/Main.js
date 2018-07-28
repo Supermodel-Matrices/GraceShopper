@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {withRouter, Route, Switch} from 'react-router-dom';
 import AllProducts from './AllProducts';
 import User from './User';
 import SingleProduct from './SingleProduct';
@@ -17,24 +17,22 @@ class Main extends Component {
 
   render() {
 		return (
-			<Router>
-				<div id="main">
-					<div id="navbar">
-						<NavBar />
-					</div>
-					<div className="container">
-						<Switch>
-							<Route exact path="/" component={AllProducts} />
-							<Route exact path="/products" component={AllProducts} />
-							<Route exact path="/products/:id" component={SingleProduct} />
-							<Route exact path="/user/:id" component={User} />
-							<Route exact path="/cart" component={CartPage} />
-							<Route exact path="/login" component={Login} />
-							<Route exact path="/signup" component={Signup} />
-						</Switch>
-					</div>
+			<div id="main">
+				<div id="navbar">
+					<NavBar />
 				</div>
-			</Router>
+				<div className="container">
+					<Switch>
+						<Route exact path="/" component={AllProducts} />
+						<Route exact path="/products" component={AllProducts} />
+						<Route exact path="/products/:id" component={SingleProduct} />
+						<Route exact path="/user/:id" component={User} />
+						<Route exact path="/cart" component={CartPage} />
+						<Route exact path="/login" component={Login} />
+						<Route exact path="/signup" component={Signup} />
+					</Switch>
+				</div>
+			</div>
 		)
   }
 }
@@ -56,4 +54,4 @@ const mapDispatch = dispatch => {
 }
 
 
-export default connect(mapState, mapDispatch)(Main);
+export default withRouter(connect(mapState, mapDispatch)(Main));
