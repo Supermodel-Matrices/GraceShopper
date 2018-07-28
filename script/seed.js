@@ -6,27 +6,37 @@ const Order = require('../server/db/Order');
 const { ordered_products: OrderedProducts } = db.models;
 
 const users = [
-  { name: 'Alex Roger', email: 'atown@email.com', password: '123S' },
-  { name: 'Magic Fodder', email: 'btown@email.com', password: '123S' },
-  { name: 'Seeing Power', email: 'ctown@email.com', password: '123S' },
-  { name: 'Hahah Woza', email: 'dtown@email.com', password: '123S' },
-  { name: 'Normal Name', email: 'etown@email.com', password: '123S' },
+  { id: 1, name: 'Alex Roger', email: 'atown@email.com', password: '123S' },
+  { id: 2, name: 'Magic Fodder', email: 'btown@email.com', password: '123S' },
+  { id: 3, name: 'Seeing Power', email: 'ctown@email.com', password: '123S' },
+  { id: 4, name: 'Hahah Woza', email: 'dtown@email.com', password: '123S' },
+  { id: 5, name: 'Normal Name', email: 'etown@email.com', password: '123S' },
 ];
 
 const products = [
-  { name: 'Candles', image: 'https://www.ikea.com/us/en/images/products/fenomen-unscented-block-candle-beige__0432192_PE586207_S4.JPG', description: 'ITS A CANDLE! MARVEL AT ITS LIGHT!', category: 'lighting', price: 30 },
-  { name: 'Big Candles', image: 'https://www.cheatsheet.com/wp-content/uploads/2017/09/melted-candle.jpg', description: 'ITS A CANDLE! MARVEL AT ITS LIGHT!', category: 'lighting', price: 60 },
-  { name: 'Small Candles', image: 'http://cdn.shopify.com/s/files/1/1559/3917/products/shutterstock_candle_med_grande.jpg?v=1477794398', description: 'ITS A CANDLE! MARVEL AT ITS LIGHT!', category: 'lighting', price: 10 },
-  { name: 'Red Candles', image: 'http://candles.org/wp-content/uploads/2016/06/red-candle.jpg', description: 'ITS A CANDLE! MARVEL AT ITS RED LIGHT!', category: 'lighting', price: 530 },
-  { name: 'White Candles', image: 'https://images.pexels.com/photos/783200/pexels-photo-783200.jpeg?auto=compress&cs=tinysrgb&h=350', description: 'ITS A CANDLE! MARVEL AT ITS WHITE LIGHT!', category: 'lighting', price: 5 },
+  { id: 1, name: 'Hexagon Geometric Chandelier', image: 'https://a.1stdibscdn.com/archivesE/upload/f_26973/1499886229133/SE_1stdibs_ORBISVX58_1_l.jpg', description: 'Omnidirectional light with dimmable LED illumination (Triac or forward-phase). Dimensions: L 20"" x W 20"" x H 58""', category: 'lighting', price: 300 },
+  { id: 2, name: 'Mirror Sculpture', image: 'https://a.1stdibscdn.com/archivesE/upload/1121189/f_114341331532005269207/11434133_master.jpg', description: 'Free-form Light steel mirror with “crinkled” edges. H 3 ft. 3 in. x W 20 in. x D 2.5 in.', category: 'wall-decor', price: 600 },
+  { id: 3, name: 'Moon Floor Lamp', image: 'https://a.1stdibscdn.com/archivesE/upload/1121189/f_103153131523245176731/10315313_master.jpg', description: 'Copper & Iron H 93.71 in. x W 94.49 in. x D 29.53 in.', category: 'lighting', price: 900 },
+  { id: 4, name: 'Jenkins Watercolor', image: 'https://a.1stdibscdn.com/archivesE/upload/1121189/f_112996531531745170176/11299653_master.jpg', description: 'The artwork measures 43 x 31"" and is archivally mounted in a 49 x 37"" frame.', category: 'wall-decor', price: 530 },
+  { id: 5, name: 'Wall Sculpture', image: 'https://a.1stdibscdn.com/archivesE/upload/1121189/f_80304631500359952172/8030463_master.jpg', description: 'Ceramic H 17.5 in. x W 21 in. x D 8 in.', category: 'wall-decor', price: 800 },
+  { id: 6, name: 'Macrame Plant Hanger', image: 'http://cdn.shopify.com/s/files/1/1791/5927/products/macrame-wall-hanger-001_b8030188-403e-49cf-a7d6-c425e092e6fe_grande.jpg', description: 'Macrame H 14 in.', category: 'greenery', price: 35 },
+  { id: 7, name: 'Pasquier Screen Print', image: 'https://a.1stdibscdn.com/archivesE/upload/1121189/f_112205111530330628933/11220511_master.jpg', description: 'H 27.56 in. x W 19.69 in. x D 0.04 in.', category: 'wall-decor', price: 720 },
+  { id: 8, name: 'Brass Wall Lights', image: 'https://a.1stdibscdn.com/rare-pair-of-1950s-paavo-tynell-perforated-brass-wall-lights-for-sale/archivesE/upload/366869/f_103576111523997705426/Two_Enlighten_March_22nd_2018_Main_15_2_org_master.jpg', description: 'H 14.5 in. x W 4.5 in. x D 10.5 in.', category: 'lighting', price: 180 },
+  { id: 9, name: 'Candlestick Chandelier', image: 'https://a.1stdibscdn.com/archivesE/upload/1121189/f_115222911532695875397/11522291_master.jpg', description: 'PK-101 candlestick of chromium-plated steel. 32 arms for candles in a spiral shape. Designed in 1956. Maker E. Kold Christensen.', category: 'lighting', price: 490 },
+  { id: 10, name: 'Black Pendant Lamp', image: 'https://a.1stdibscdn.com/archivesE/upload/1121189/f_115197711532674386003/11519771_master.jpg', description: 'H 9.06 in. x Dm 19.69 in.', category: 'lighting', price: 510 },
+  { id: 11, name: 'Helix Floor Lamp', image: 'https://a.1stdibscdn.com/archivesE/upload/1121189/f_77321331499770606434/7732133_l.jpg', description: 'Brass, Granite, Marble H 62 in. x W 16 in. x D 22 in.', category: 'lighting', price: 530 },
+  { id: 12, name: 'Matière Composition', image: 'https://a.1stdibscdn.com/archivesE/upload/1121189/f_75309531495541121622/7530953_l.jpg', description: 'H 39.38 in. x W 39.38 in. x D 0.2 in.', category: 'wall-decor', price: 820 },
+  { id: 13, name: 'Moroccan Textile', image: 'https://a.1stdibscdn.com/archivesE/upload/1121189/f_48665731465904201336/4866573_l.jpg', description: 'Tabrdouhte cape. Weft wrapping technique using wool with white linen', category: 'textiles', price: 380 },
+  { id: 14, name: 'Tulu Bedding Rug ', image: 'https://a.1stdibscdn.com/archivesE/upload/1121223/f_3622002/3622002_l.jpg', description: 'Turkish Wool W 2 ft. 1 in. x L 3 ft. 1 in. ', category: 'textiles', price: 400 },
+  { id: 15, name: 'Turkish Pillowcases', image: 'https://a.1stdibscdn.com/archivesE/upload/1121189/f_81615031503560169661/8161503_master.jpg', description: 'Two pillows made out of a fragment nord-east Turkey nomads Kilim.', category: 'textiles', price: 80 }
 ];
 
 const orders = [
-  { total: 635, userId: 1 },
-  { total: 635, userId: 1 },
-  { total: 635, userId: 2 },
-  { total: 635, userId: 4 },
-  { total: 635, userId: 1 },
+  { total: 910, userId: 1 },
+  { total: 2100, userId: 2 },
+  { total: 1330, userId: 4 },
+  { total: 215 },
+  { total: 1330, userId: 5 },
 ];
 
 const orderedproducts = [
@@ -36,11 +46,11 @@ const orderedproducts = [
   },
   {
     orderId: 1,
-    productId: 1
+    productId: 4
   },
   {
     orderId: 1,
-    productId: 2
+    productId: 15
   },
   {
     orderId: 2,
@@ -49,6 +59,26 @@ const orderedproducts = [
   {
     orderId: 2,
     productId: 5
+  },
+  {
+    orderId: 2,
+    productId: 14
+  },
+  {
+    orderId: 4,
+    productId: 10
+  },
+  {
+    orderId: 4,
+    productId: 12
+  },
+  {
+    orderId: 5,
+    productId: 2
+  },
+  {
+    orderId: 5,
+    productId: 7
   },
 ];
 
