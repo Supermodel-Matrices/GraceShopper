@@ -32,7 +32,7 @@ class CartPage extends Component {
 		const cartKeys = Object.keys(cart);
 		for (let i = 0; i < cartKeys.length; i++) {
 			const product = await this.getItem(this.props.cartKeys[i]);
-			cartItems.push(product);
+			cartItems.push({product: product, quantity: cart[cartKeys[i]]});
 		}
 		this.setState({ cartItems: cartItems })
 		this.calculatePrices(this.state.cartItems);
@@ -50,6 +50,7 @@ class CartPage extends Component {
 			}
 		});
 		this.setState({ cartItems: newCart });
+		this.props.removeFromCart(id);
 		this.calculatePrices(newCart);
 	}
 
