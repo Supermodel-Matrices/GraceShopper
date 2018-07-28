@@ -13,16 +13,6 @@ const fetchCart = (cart) => ({
 	cart
 });
 
-// export const addItemToCart = (id) => ({
-// 	type: ADD_ITEM_TO_CART,
-// 	id,
-// });
-
-// export const removeItemFromCart = (id) => ({
-// 	type: REMOVE_ITEM_FROM_CART,
-// 	id,
-// });
-
 //Thunk
 export const getCart = () => async dispatch => {
 	const response = await axios.get(`/api/cart`);
@@ -31,12 +21,12 @@ export const getCart = () => async dispatch => {
 }
 
 export const addToCart = (id) => async dispatch => {
-	const response = await axios.put(`/api/cart`, {action: 'add', id: id});
+	const response = await axios.put(`/api/cart`, { action: 'add', id: id });
 	dispatch(fetchCart(response.data));
 }
 
 export const removeFromCart = (id) => async dispatch => {
-	const response = await axios.put(`/api/cart`, {action: 'remove', id: id});
+	const response = await axios.put(`/api/cart`, { action: 'remove', id: id });
 	dispatch(fetchCart(response.data));
 }
 
@@ -45,10 +35,6 @@ export const cartReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case FETCH_CART:
 			return action.cart;
-		// case ADD_ITEM_TO_CART:
-		// 	return state[action.id] ? {...state, [action.id]: state[action.id] + 1} : {...state, [action.id]: 1};
-		// case REMOVE_ITEM_FROM_CART:
-		// 	return Object.keys(state).filter(id => id !== action.id.toString()).reduce((acc,key) => {acc[key] = state[key]; return acc;}, {});
 		default:
 			return state;
 	}
