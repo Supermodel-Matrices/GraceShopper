@@ -6,7 +6,7 @@ const User = require('./User');
 Order.belongsTo(User);
 User.hasMany(Order);
 
-Order.hasMany(Product);
+// Order.hasMany(Product);
 // Product.belongsToMany(Order, {through: 'ordered_products', as: 'orderProducts'});
 
 module.exports = {
