@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {login} from '../store/user';
+import {Link} from 'react-router-dom';
 
 class Login extends Component {
 	constructor () {
@@ -35,6 +36,9 @@ class Login extends Component {
 					<div>
 						<button type="submit" className="btn-main">submit</button>
 					</div>
+				</form>
+				<form className="form-main" method="get" action="/auth/google">
+					<button type="submit" className="btn-main">login with google</button>
 				</form>
 			</div>
 		);

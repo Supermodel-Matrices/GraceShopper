@@ -7,10 +7,10 @@ const Sequelize = require('sequelize');
 const User = db.define('user', {
 	name: {
 		type: Sequelize.STRING,
-		allowNull: false,
-		validate: {
-				notEmpty: true
-		}
+		// allowNull: false,
+		// validate: {
+		// 		notEmpty: true
+		// }
 	},
 	email: {
 		type: Sequelize.STRING,
@@ -23,11 +23,14 @@ const User = db.define('user', {
 	},
 	password: {
 		type: Sequelize.STRING,
-		allowNull: false,
+		// allowNull: false,
 		validate: {
 			notEmpty: true
 		}
 	},
+	googleId: {
+    type: Sequelize.STRING
+  },
 	salt: {
     type: Sequelize.STRING
 	},
