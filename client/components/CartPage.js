@@ -12,6 +12,7 @@ class CartPage extends Component {
 			tax: 0,
 			shipping: 3,
 			total: 0,
+			cart: {},
 			cartItems: []
 		};
 		this.getItem = this.getItem.bind(this);
@@ -34,7 +35,7 @@ class CartPage extends Component {
 			const product = await this.getItem(cartKeys[i]);
 			cartItems.push({product: product, quantity: cart[cartKeys[i]]});
 		}
-		this.setState({ cartItems: cartItems })
+		this.setState({ cart: cart, cartItems: cartItems })
 		this.calculatePrices(this.state.cartItems);
 	}
 

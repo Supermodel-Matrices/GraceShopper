@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
+const stripe = require('stripe');
 const {User} = require('./db');
 
 if (process.env.NODE_ENV !== 'production') {
