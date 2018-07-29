@@ -69,7 +69,7 @@ class Checkout extends Component {
                     <h2>Total: &#36;{this.state.total ? this.state.total + this.state.shipping : 0}</h2>
                 </div>
                 <div>
-                    <form action="/charge" method="POST" id='stripe' />
+                    <form action="/charge" method="POST" id="stripe" />
                 </div>
             </div>
         );
