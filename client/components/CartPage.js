@@ -95,7 +95,7 @@ class CartPage extends Component {
 					<h3>Shipping: &#36;{this.state.shipping} </h3>
 					<h2>Total: &#36;{this.state.total ? this.state.total + this.state.shipping : 0}</h2>
 				</div>
-				<Link to="/cart/checkout" >checkout</Link>
+				<Link to={{pathname: '/cart/checkout', state: this.state }}>Checkout</Link>
 			</div>
 		);
 	}
