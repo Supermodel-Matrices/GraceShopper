@@ -23,9 +23,11 @@ export class SingleProduct extends Component {
       <div className="right-panel">
         <div className="single-product">
           <div className="single-product-details">
+            <button type="button" className="btn-main" onClick={() => this.props.addToCart(product.id)}>+ Add</button>
+            <br />
+            <br />
             <p className="bold">{product.name}</p>
             <p>{product.price} USD</p>
-            <button type="button" className="btn-main" onClick={() => this.props.addToCart(product.id)}>+ Add</button>
             <p>{product.description}</p>
           </div>
           <img className="single-product-image" src={product.image} />
