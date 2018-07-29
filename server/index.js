@@ -51,6 +51,11 @@ app.use('/api', require('./api/'));
 
 app.use('/google', require('./oauth'));
 
+app.post('/charge', function(req,res) {
+  console.log(req.body);
+  res.send('TEST');
+});
+
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });

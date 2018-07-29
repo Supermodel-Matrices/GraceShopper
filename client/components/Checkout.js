@@ -9,7 +9,6 @@ class Checkout extends Component {
             tax: 0,
             shipping: 0,
             total: 0,
-            cart: {},
             cartItems: []
         };
     }
@@ -20,21 +19,20 @@ class Checkout extends Component {
             tax: this.props.location.state.tax,
             shipping: this.props.location.state.shipping,
             total: this.props.location.state.total,
-            cart: this.props.location.state.cart,
             cartItems: this.props.location.state.cartItems
         });
 
-        //Runs Script For Stripe Checkout And Appends To Page. Can't Run Script In JSX
+        //Runs Script For Stripe Checkout And Appends To Page. Can't Run Script Directly In JSX
         const script = document.createElement('script');
         script.src = 'https://checkout.stripe.com/checkout.js';
         script.className = 'stripe-button';
-        script.dataset.key = 'pk_test_Eiah13e1Nj0s73VpTZ4T36u8';
+        script.dataset.key = 'pk_test_Eiah13e1Nj0s73VpTZ4T36u8'; //My Test Key. Have To Hide This Later...
         script.dataset.amount = this.props.location.state.total;
         script.dataset.name = 'Supermodel Matrixes';
         script.dataset.description = 'PAY ME!!!';
         script.dataset.image = '/cart.png';
         script.dataset.locale = 'auto';
-        script.dataset.zipCode = 'true'; // Note camelCase!
+        script.dataset.zipCode = 'true';
         let form = document.getElementById('stripe');
         form.appendChild(script);
     }
@@ -77,5 +75,4 @@ class Checkout extends Component {
 }
 
 export default Checkout;
-
 
