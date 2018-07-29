@@ -26,7 +26,7 @@ class Checkout extends Component {
         const script = document.createElement('script');
         script.src = 'https://checkout.stripe.com/checkout.js';
         script.className = 'stripe-button';
-        script.dataset.key = 'pk_test_Eiah13e1Nj0s73VpTZ4T36u8'; //My Test Key. Have To Hide This Later...
+        script.dataset.key = 'pk_test_Eiah13e1Nj0s73VpTZ4T36u8'; //Have To Hide This Later...
         script.dataset.amount = this.props.location.state.total;
         script.dataset.name = 'Supermodel Matrixes';
         script.dataset.description = 'PAY ME!!!';
