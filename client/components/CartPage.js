@@ -31,7 +31,7 @@ class CartPage extends Component {
 		const cart = await this.props.getCart();
 		const cartKeys = Object.keys(cart);
 		for (let i = 0; i < cartKeys.length; i++) {
-			const product = await this.getItem(this.props.cartKeys[i]);
+			const product = await this.getItem(cartKeys[i]);
 			cartItems.push({product: product, quantity: cart[cartKeys[i]]});
 		}
 		this.setState({ cartItems: cartItems })
@@ -104,7 +104,6 @@ class CartPage extends Component {
 const mapToState = (state) => ({
 	user: state.user,
 	cart: state.cart,
-	cartKeys: Object.keys(state.cart),
 	product: state.products.currentProduct,
 });
 
