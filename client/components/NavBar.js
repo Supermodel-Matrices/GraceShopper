@@ -15,8 +15,8 @@ const NavBar = (props) => {
 				<Link to="/products/category/lighting">Lighting</Link>
 				<Link to="/products/category/greenery">Greenery</Link>
 				<Link to="/products/category/textiles">Textiles</Link>
-				<Link to="/products/category/walldecor">Wall Decor</Link>
-				<Link to="/cart"><img src="./cart.png" className="cart-icon" /><span className="cart-count">{cartCount}</span>
+				<Link to="/products/category/wall-decor">Wall Decor</Link>
+				<Link to="/cart"><img src="https://cdn1.iconfinder.com/data/icons/social-productivity-line-art-4/128/shopping-cart2-512.png" className="cart-icon" /><span className="cart-count">{cartCount}</span>
 				</Link>
 			</nav>
 			</div>
