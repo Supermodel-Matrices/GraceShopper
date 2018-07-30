@@ -32,6 +32,11 @@ export const login = (formData) => async dispatch => {
 
 export const signup = (formData) => async dispatch => {
 	const response = await axios.post('/auth/signup', formData);
+	console.log('hahahhaha', response.status)
+	if (response.status === 200) {
+		console.log('user exists');
+
+	}
 	dispatch(loginUser(response.data));
 }
 
