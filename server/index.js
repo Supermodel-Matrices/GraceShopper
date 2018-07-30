@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
+const stripe = require('stripe')('sk_test_6mBhvrT2NOUUe0Cv77gkoRkF'); //Have To Hide This Later...
 const {User} = require('./db');
 
 if (process.env.NODE_ENV !== 'production') {
@@ -49,6 +50,22 @@ app.use('/auth', require('./auth'));
 app.use('/api', require('./api/'));
 
 app.use('/google', require('./oauth'));
+
+app.post('/charge', function(req,res) {
+  const amount = 500; //Have To Calculate Amount Server-Side.
+
+  stripe.customers.create({
+    email: req.body.stripeEmail,
+    source: req.body.stripeToken
+  })
+  .then(customer => stripe.charges.create({
+    amount,
+    description: 'Home Decor Purchase',
+    currency: 'usd',
+    customer: customer.id
+  }))
+  .then(charge => res.redirect('/successpage'))
+});
 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
