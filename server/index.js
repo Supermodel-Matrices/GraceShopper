@@ -5,13 +5,11 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const stripe = require('stripe')('sk_test_6mBhvrT2NOUUe0Cv77gkoRkF'); //Have To Hide This Later...
-const {User} = require('./db');
+const { User, Product, Order } = require('./db');
 
 if (process.env.NODE_ENV !== 'production') {
   require('../secrets');
 }
-
-// require('main');
 
 const app = express();
 
@@ -51,21 +49,37 @@ app.use('/api', require('./api/'));
 
 app.use('/google', require('./oauth'));
 
-app.post('/charge', function(req,res) {
-  const { cart } = User.findOne({where: {email: req.body.stripeEmail}})
-  console.log(cart);
-  
-  stripe.customers.create({
-    email: req.body.stripeEmail,
-    source: req.body.stripeToken
-  })
-  .then(customer => stripe.charges.create({
-    amount,
-    description: 'Home Decor Purchase',
-    currency: 'usd',
-    customer: customer.id
-  }))
-  .then(charge => res.redirect('/successpage'))
+app.post('/charge', async function (req, res, next) {
+  try {
+    //Calculate Price And Create Order For Database
+    const user = await User.findOne({ where: { email: req.body.stripeEmail } });
+    let cartKeys;
+    user ? cartKeys = Object.keys(user.cart) : cartKeys = Object.keys(req.session.cart);
+    let subtotal = 0;
+    for (let i = 0; i < cartKeys.length; i++) {
+      const product = await Product.findOne({ where: { id: cartKeys[i] } });
+      subtotal += (product.price * (user ? user.cart[cartKeys[i]] : req.session.cart[cartKeys[i]]));
+    }
+    const tax = subtotal * .10;
+    const shipping = 100;
+    const total = subtotal + tax + shipping;
+    await Order.create({ items: user ? user.cart : req.session.cart, total: total, userId: user ? user.id : null});
+
+    //Creating Purchase On Stripe.
+    const customer = await stripe.customers.create({
+      email: req.body.stripeEmail,
+      source: req.body.stripeToken
+    });
+    const trans = await stripe.charges.create({
+      amount: total,
+      description: 'Home Decor Purchase',
+      currency: 'usd',
+      customer: customer.id
+    });
+    res.redirect('/success');
+  } catch (err) {
+    next(err);
+  }
 });
 
 app.get('*', function (req, res) {
