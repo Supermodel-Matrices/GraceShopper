@@ -252,3 +252,21 @@ a:hover {
   text-align: center;
   color: #963333;
 }
+
+#searchbar {
+  width: 150px;
+  position: fixed;
+  left: 20px;
+  bottom: 130px;
+}
+
+#search {
+  margin-left: 20px;
+  width: 70px;
+  background-color: transparent;
+}
+
+.search-btn {
+  background-color: transparent;
+  border: none;
+}

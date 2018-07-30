@@ -5,9 +5,21 @@ import {Link} from 'react-router-dom'
 import {addToCart} from '../store/cart';
 
 export class AllProducts extends Component {
+  constructor () {
+    super();
+    this.state = {
+      searchTerm: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
 
   componentDidMount () {
     this.props.fetchProducts();
+  }
+
+  handleChange (evt) {
+    this.setState({searchTerm: evt.target.value});
   }
 
   render () {
@@ -16,9 +28,21 @@ export class AllProducts extends Component {
     ?
     products = this.props.allProducts.filter(product => product.category === this.props.match.params.cat)
     :
-    products = this.props.allProducts;
+    (this.state.searchTerm ?
+    products = this.props.allProducts.filter(product =>
+    product.name.match((new RegExp(this.state.searchTerm, "gi"))) || product.name.match((new RegExp(this.state.searchTerm, "gi")))) :
+    products = this.props.allProducts);
+
     return (
       <React.Fragment>
+        {!this.props.match.params.cat ?
+        <div id="searchbar">
+          <input id="search" type="text" onChange={this.handleChange} value={this.state.searchTerm} />
+          <button className="search-btn" type="button" >
+            <img src="https://cdn4.iconfinder.com/data/icons/webshop/32/search-01-512.png" className="cart-icon" />
+          </button>
+        </div> :
+        null}
         {products.length
         ?
         <ul className="product-list">
@@ -38,7 +62,9 @@ export class AllProducts extends Component {
           ))}
         </ul>
         :
-        <h1>No products available.</h1>
+        <ul className="product-list">
+          <h1>No products available.</h1>
+        </ul>
         }
       </React.Fragment>
     )
