@@ -5,7 +5,6 @@ import {logoutUser} from '../store/user';
 import {getCart} from '../store/cart';
 
 export class NavBar extends Component {
-
 	componentDidMount () {
 		this.props.getCart();
 	}
