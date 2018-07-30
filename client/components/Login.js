@@ -24,22 +24,27 @@ class Login extends Component {
 	render () {
 		return (
 			<div className="right-panel">
-				<form className="form-main" onSubmit={this.handleSubmit}>
-					<div className="form-main-field">
-						<label htmlFor="email">email </label>
-						<input type="email" name="email" value={this.state.email} onChange={this.handleChange} />
-					</div>
-					<div className="form-main-field">
-						<label htmlFor="password">password </label>
-						<input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-					</div>
-					<div>
-						<button type="submit" className="btn-main">submit</button>
-					</div>
-				</form>
-				<form className="form-main" method="get" action="/auth/google">
-					<button type="submit" className="btn-main">login with google</button>
-				</form>
+				<div className="signin-login">
+					<p>Log In</p>
+					<br />
+					<br />
+					<form className="form-main" onSubmit={this.handleSubmit}>
+						<div className="form-main-field">
+							<label htmlFor="email">email </label>
+							<input type="email" name="email" value={this.state.email} onChange={this.handleChange} />
+						</div>
+						<div className="form-main-field">
+							<label htmlFor="password">password </label>
+							<input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+						</div>
+						<div>
+							<button type="submit" className="btn-main btn-right">submit</button>
+						</div>
+					</form>
+					<form className="form-main" method="get" action="/auth/google">
+						<button type="submit" className="btn-main">login with google</button>
+					</form>
+				</div>
 			</div>
 		);
 	}

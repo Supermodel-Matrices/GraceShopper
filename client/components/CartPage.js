@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
-import { getCart, removeFromCart } from '../store/cart';
+import {getCart, addToCart, removeFromCart} from '../store/cart';
 
 class CartPage extends Component {
 	constructor() {
@@ -10,11 +10,12 @@ class CartPage extends Component {
 		this.state = {
 			subtotal: 0,
 			tax: 0,
-			shipping: 3,
+			shipping: 100,
 			total: 0,
 			cartItems: []
 		};
 		this.getItem = this.getItem.bind(this);
+		this.addItem = this.addItem.bind(this);
 		this.removeItem = this.removeItem.bind(this);
 		this.calculatePrices = this.calculatePrices.bind(this);
 	}
@@ -31,11 +32,23 @@ class CartPage extends Component {
 		const cart = await this.props.getCart();
 		const cartKeys = Object.keys(cart);
 		for (let i = 0; i < cartKeys.length; i++) {
-			const product = await this.getItem(this.props.cartKeys[i]);
+			const product = await this.getItem(cartKeys[i]);
 			cartItems.push({product: product, quantity: cart[cartKeys[i]]});
 		}
-		this.setState({ cartItems: cartItems })
+		this.setState({cartItems: cartItems})
 		this.calculatePrices(this.state.cartItems);
+	}
+
+	addItem(id) {
+		let newCart = this.state.cartItems;
+		newCart.map(item => {
+			if (item.product.id === id) {
+					item.quantity++;
+			}
+		});
+		this.setState({cartItems: newCart});
+		this.props.addToCart(id);
+		this.calculatePrices(newCart);
 	}
 
 	removeItem(id) {
@@ -67,35 +80,41 @@ class CartPage extends Component {
 	render() {
 		return (
 			<div className="right-panel">
-				<div className="title">
-					<h1>Your Shopping Cart</h1>
+				<div className="cart">
+					<div className="cart-heading">
+						<p className="bold">Product</p>
+						<p className="bold">Quantity</p>
+					</div>
+					<div className="cart-items">
+						{this.state.cartItems.length ?
+							this.state.cartItems.map(item =>
+								(<div key={item.product.id}>
+										<div className="cart-row">
+											<Link to={`/products/${item.product.id}`} className="undecorated-link unpadded-link cart-image">
+												<img src={item.product.image} />
+											</Link>
+											<p>{item.product.name}</p>
+											<p>{item.product.price} USD</p>
+											<div className="cart-quantity">
+												<button className="btn-main" type="button" onClick={() => this.removeItem(item.product.id)}>—</button>
+												<p>{item.quantity}</p>
+												<button className="btn-main" type="button" onClick={() => this.addItem(item.product.id)}>+</button>
+											</div>
+										</div>
+								 </div>
+								))
+							:
+							<h1>No Items Currently In Your Cart</h1>
+						}
+					</div>
+					<div className="cart-cost">
+						<p><span className="bold">Subtotal</span><span> {this.state.subtotal}</span></p>
+						<p><span className="bold">Tax</span><span> {this.state.tax}</span></p>
+						<p><span className="bold">Shipping</span><span> {this.state.shipping}</span></p>
+						<p><span className="bold">TOTAL</span><span> {this.state.total ? this.state.total + this.state.shipping : 0} USD</span></p>
+						<Link to="/cart/checkout" className="link-bordered unpadded-link">Checkout</Link>
+					</div>
 				</div>
-				<div>
-					{this.state.cartItems.length ?
-						this.state.cartItems.map(item =>
-							(<div key={item.product.id}>
-								<Link to={`/products/${item.product.id}`}>
-									<div>
-										<img src={item.product.image} />
-										<h4>{item.product.name}</h4>
-										<p>{item.product.price} USD</p>
-										<p>Q: {item.quantity}</p>
-									</div>
-								</Link>
-								<button className="btn-main" type="button" onClick={() => this.removeItem(item.product.id)}>Remove</button>
-							</div>
-							))
-						:
-						<h1>No Items Currently In Your Cart</h1>
-					}
-				</div>
-				<div className="cartInfo">
-					<h3>Subtotal: &#36;{this.state.subtotal}</h3>
-					<h3>Tax: &#36;{this.state.tax}</h3>
-					<h3>Shipping: &#36;{this.state.shipping} </h3>
-					<h2>Total: &#36;{this.state.total ? this.state.total + this.state.shipping : 0}</h2>
-				</div>
-				<Link to="/cart/checkout" >checkout</Link>
 			</div>
 		);
 	}
@@ -104,15 +123,13 @@ class CartPage extends Component {
 const mapToState = (state) => ({
 	user: state.user,
 	cart: state.cart,
-	cartKeys: Object.keys(state.cart),
 	product: state.products.currentProduct,
 });
 
 const mapToDispatch = dispatch => ({
 		getCart: () => dispatch(getCart()),
+		addToCart: (id) => dispatch(addToCart(id)),
 		removeFromCart: (id) => dispatch(removeFromCart(id))
 });
 
 export default connect(mapToState, mapToDispatch)(CartPage);
-
-
