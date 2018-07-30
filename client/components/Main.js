@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Route, Switch} from 'react-router-dom';
+import Home from './home';
 import AllProducts from './AllProducts';
 import User from './User';
 import SingleProduct from './SingleProduct';
@@ -24,7 +25,7 @@ class Main extends Component {
 				</div>
 				<div className="container">
 					<Switch>
-						<Route exact path="/" component={AllProducts} />
+						<Route exact path="/" component={Home} />
 						<Route exact path="/products" component={AllProducts} />
 						<Route exact path="/products/category/:cat" component={AllProducts} />
 						<Route exact path="/products/:id" component={SingleProduct} />
