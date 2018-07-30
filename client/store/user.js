@@ -26,13 +26,25 @@ const logout = () => ({
 })
 
 export const login = (formData) => async dispatch => {
-	const response = await axios.put('/auth/login', formData);
-	dispatch(loginUser(response.data));
+	let response;
+	try {
+		const response = await axios.put('/auth/login', formData);
+		dispatch(loginUser(response.data));
+	}
+	catch (err) {
+		return err.response.status;
+	}
 };
 
 export const signup = (formData) => async dispatch => {
-	const response = await axios.post('/auth/signup', formData);
-	dispatch(loginUser(response.data));
+	let response;
+	try {
+		response = await axios.post('/auth/signup', formData);
+		dispatch(loginUser(response.data));
+	}
+	catch (err) {
+		return err.response.status;
+	}
 }
 
 export const getLoggedInUser = () => async dispatch => {
