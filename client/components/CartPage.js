@@ -22,7 +22,7 @@ class CartPage extends Component {
 
 	//Function
 	async getItem(productId) {
-		const { data } = await axios.get(`/api/products/${productId}`);
+		const {data} = await axios.get(`/api/products/${productId}`);
 		const product = data;
 		return product;
 	}
@@ -69,7 +69,7 @@ class CartPage extends Component {
 
 	calculatePrices(cartItems) {
 		const newSubtotal = cartItems.length ? cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0) : 0;
-		const newTax = cartItems.length ? cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0) * .15 : 0;
+		const newTax = cartItems.length ? cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0) * .10 : 0;
 		this.setState({
 			subtotal: newSubtotal,
 			tax: newTax,
