@@ -3,18 +3,19 @@ const {User, Order} = require('../db/index');
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const user = await User.findOne({
-      include: [{
-          model: Order,
-          include: [{
-              association: 'orderProducts'
-            }]
-        }],
-      where: {
-        id: req.params.id
-      }
-    });
-    res.status(200).send(user);
+    if (req.user.id === +req.params.id) {
+      const user = await User.findOne({
+        include: [{
+            model: Order
+          }],
+        where: {
+          id: req.params.id
+        }
+      });
+      res.status(200).json(user);
+    } else {
+      res.status(403).end();
+    }
   }
   catch (err) {
     next(err);
