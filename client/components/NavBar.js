@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import {logoutUser} from '../store/user';
+import {getCart} from '../store/cart';
 
 const NavBar = (props) => {
 	let cartQuantities = (Object.values(props.cart));
@@ -40,7 +41,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   logout: () => {
 		dispatch(logoutUser());
 		ownProps.history.push('/');
-	}
+	},
+	getCart: () => dispatch(getCart())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));
