@@ -113,7 +113,7 @@ class CartPage extends Component {
 						<p><span className="bold">Tax</span><span> {this.state.tax}</span></p>
 						<p><span className="bold">Shipping</span><span> {this.state.shipping}</span></p>
 						<p><span className="bold">TOTAL</span><span> {this.state.total ? this.state.total + this.state.shipping : 0} USD</span></p>
-						<Link to={{ pathname: '/cart/checkout', state: this.state }} className="link-bordered unpadded-link">Checkout</Link>
+						{this.state.cartItems.length ? <Link to={{ pathname: '/cart/checkout', state: this.state }} className="link-bordered unpadded-link">Checkout</Link> : <Link to="/cart" className="link-bordered unpadded-link">Checkout</Link>}
 					</div>
 				</div>
 			</div>
