@@ -52,8 +52,9 @@ app.use('/api', require('./api/'));
 app.use('/google', require('./oauth'));
 
 app.post('/charge', function(req,res) {
-  const amount = 500; //Have To Calculate Amount Server-Side.
-
+  const { cart } = User.findOne({where: {email: req.body.stripeEmail}})
+  console.log(cart);
+  
   stripe.customers.create({
     email: req.body.stripeEmail,
     source: req.body.stripeToken
