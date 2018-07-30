@@ -39,6 +39,7 @@ export const getLoggedInUser = () => async dispatch => {
 	const response = await axios.get('/auth/me');
 	const loggedInUser = response.data;
 	dispatch(loginUser(loggedInUser));
+	return loggedInUser;
 }
 
 export const logoutUser = () => async dispatch => {
