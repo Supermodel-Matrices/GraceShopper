@@ -247,3 +247,8 @@ a:hover {
 .bold {
   font-weight: 700;
 }
+
+#error {
+  text-align: center;
+  color: #963333;
+}

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {login} from '../store/user';
-import {Link} from 'react-router-dom';
 
 class Login extends Component {
 	constructor () {
@@ -16,9 +15,15 @@ class Login extends Component {
   handleChange (evt) {
     this.setState({[evt.target.name]: evt.target.value});
 	}
-	handleSubmit (evt) {
+	async handleSubmit (evt) {
 		evt.preventDefault();
-		this.props.login(this.state);
+		const status = await this.props.login(this.state);
+		if (status === 401) {
+			document.getElementById('error').innerHTML = 'login failed - try again';
+		}
+		else {
+			this.props.history.push('/products');
+		}
 	}
 
 	render () {
@@ -33,14 +38,19 @@ class Login extends Component {
 							<label htmlFor="email">email </label>
 							<input type="email" name="email" value={this.state.email} onChange={this.handleChange} />
 						</div>
+						<span>&nbsp;</span>
 						<div className="form-main-field">
 							<label htmlFor="password">password </label>
 							<input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
 						</div>
+						<span id="error">&nbsp;</span>
 						<div>
 							<button type="submit" className="btn-main btn-right">submit</button>
 						</div>
 					</form>
+					<br />
+					<p>or</p>
+					<br />
 					<form className="form-main" method="get" action="/auth/google">
 						<button type="submit" className="btn-main">login with google</button>
 					</form>
@@ -50,10 +60,8 @@ class Login extends Component {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
-	return {
+const mapDispatchToProps = (dispatch) => ({
 	  login: (formData) => dispatch(login(formData))
-	}
-}
+});
 
 export default connect(null, mapDispatchToProps)(Login);

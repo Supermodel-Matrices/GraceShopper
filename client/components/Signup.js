@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {signup} from '../store/user';
+import {withRouter} from 'react-router-dom';
 
 class Signup extends Component {
 	constructor (props) {
@@ -18,9 +19,15 @@ class Signup extends Component {
 			[evt.target.name]: evt.target.value
 		});
 	}
-	handleSubmit (evt) {
+	async handleSubmit (evt) {
 		evt.preventDefault();
-		this.props.signup(this.state);
+		const status = await this.props.signup(this.state);
+		if (status === 409) {
+			document.getElementById('error').innerHTML = 'email is already registered';
+		}
+		else {
+			this.props.history.push('/products');
+		}
 	}
 
 	render () {
@@ -35,18 +42,24 @@ class Signup extends Component {
 							<label htmlFor="name">name</label>
 							<input type="name" name="name" onChange={this.handleChange} value={this.state.name} />
 						</div>
+						<span>&nbsp;</span>
 						<div className="form-main-field">
 							<label htmlFor="email">email</label>
 							<input type="email" name="email" onChange={this.handleChange} value={this.state.email} />
 						</div>
+						<span id="error">&nbsp;</span>
 						<div className="form-main-field">
 							<label htmlFor="password">password </label>
 							<input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
 						</div>
+						<span id="error">&nbsp;</span>
 						<div>
 							<button type="submit" className="btn-main btn-right">submit</button>
 						</div>
 					</form>
+					<br />
+					<p>or</p>
+					<br />
 					<form className="form-main" method="get" action="/auth/google">
 						<button type="submit" className="btn-main">signup with google</button>
 					</form>
@@ -64,4 +77,4 @@ const mapDispatchToProps = (dispatch) => ({
 	  signup: (formData) => dispatch(signup(formData))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Signup));

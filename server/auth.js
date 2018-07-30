@@ -33,9 +33,7 @@ router.post('/signup', async (req, res, next) => {
       }
     });
     if (user) {
-			console.log(user);
-			res.status(200).send();
-      // res.status(409).send('email already registered');
+      res.status(409).send('email already registered');
 		}
 		else {
 			const newUser = await User.create(req.body);
