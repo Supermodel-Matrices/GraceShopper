@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
-import { getCart, addToCart, removeFromCart } from '../store/cart';
+import {getCart, addToCart, removeFromCart} from '../store/cart';
 
 class CartPage extends Component {
 	constructor() {
@@ -22,7 +22,7 @@ class CartPage extends Component {
 
 	//Function
 	async getItem(productId) {
-		const { data } = await axios.get(`/api/products/${productId}`);
+		const {data} = await axios.get(`/api/products/${productId}`);
 		const product = data;
 		return product;
 	}
@@ -33,9 +33,9 @@ class CartPage extends Component {
 		const cartKeys = Object.keys(cart);
 		for (let i = 0; i < cartKeys.length; i++) {
 			const product = await this.getItem(cartKeys[i]);
-			cartItems.push({ product: product, quantity: cart[cartKeys[i]] });
+			cartItems.push({product: product, quantity: cart[cartKeys[i]]});
 		}
-		this.setState({ cartItems: cartItems })
+		this.setState({cartItems: cartItems})
 		this.calculatePrices(this.state.cartItems);
 	}
 
@@ -46,7 +46,7 @@ class CartPage extends Component {
 				item.quantity++;
 			}
 		});
-		this.setState({ cartItems: newCart });
+		this.setState({cartItems: newCart});
 		this.props.addToCart(id);
 		this.calculatePrices(newCart);
 	}
@@ -62,7 +62,7 @@ class CartPage extends Component {
 				}
 			}
 		});
-		this.setState({ cartItems: newCart });
+		this.setState({cartItems: newCart});
 		this.props.removeFromCart(id);
 		this.calculatePrices(newCart);
 	}

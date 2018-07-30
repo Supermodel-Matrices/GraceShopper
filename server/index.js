@@ -4,12 +4,12 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
-const stripe = require('stripe')('sk_test_6mBhvrT2NOUUe0Cv77gkoRkF'); //Have To Hide This Later...
-const { User, Product, Order } = require('./db');
+const {User, Product, Order} = require('./db');
 
 if (process.env.NODE_ENV !== 'production') {
   require('../secrets');
 }
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 const app = express();
 
@@ -76,15 +76,8 @@ app.post('/charge', async function (req, res, next) {
       currency: 'usd',
       customer: customer.id
     });
-
-
-    if(user){
-      await user.update({cart: {}});
-      res.Write("<script language='javascript'>window.alert('SuccessFully Payment!'); window.location='/';</script>");
-    } else {
-      req.session.cart = {};
-      req.redirect('/');
-    }
+    user ? await user.update({cart: {}}) : req.session.cart = {};
+    res.redirect('/success');
   } catch (err) {
     next(err);
   }
