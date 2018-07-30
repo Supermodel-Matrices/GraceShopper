@@ -22,7 +22,7 @@ class CartPage extends Component {
 
 	//Function
 	async getItem(productId) {
-		const { data } = await axios.get(`/api/products/${productId}`);
+		const {data} = await axios.get(`/api/products/${productId}`);
 		const product = data;
 		return product;
 	}
@@ -69,7 +69,7 @@ class CartPage extends Component {
 
 	calculatePrices(cartItems) {
 		const newSubtotal = cartItems.length ? cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0) : 0;
-		const newTax = cartItems.length ? cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0) * .15 : 0;
+		const newTax = cartItems.length ? cartItems.reduce((acc, item) => { return acc + item.product.price * item.quantity; }, 0) * .10 : 0;
 		this.setState({
 			subtotal: newSubtotal,
 			tax: newTax,
@@ -112,7 +112,7 @@ class CartPage extends Component {
 						<p><span className="bold">Tax</span><span> {this.state.tax}</span></p>
 						<p><span className="bold">Shipping</span><span> {this.state.shipping}</span></p>
 						<p><span className="bold">TOTAL</span><span> {this.state.total ? this.state.total + this.state.shipping : 0} USD</span></p>
-						<Link to="/cart/checkout" className="link-bordered unpadded-link">Checkout</Link>
+						<Link to={{pathname: '/cart/checkout', state: this.state }} className="link-bordered unpadded-link">Checkout</Link>
 					</div>
 				</div>
 			</div>

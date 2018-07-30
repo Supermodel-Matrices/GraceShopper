@@ -8,6 +8,7 @@ import CartPage from './CartPage';
 import NavBar from './NavBar';
 import Login from './Login';
 import Signup from './Signup';
+import Checkout from './Checkout';
 import {getLoggedInUser} from '../store/user';
 
 class Main extends Component {
@@ -29,6 +30,7 @@ class Main extends Component {
 						<Route exact path="/products/:id" component={SingleProduct} />
 						<Route exact path="/user/:id" component={User} />
 						<Route exact path="/cart" component={CartPage} />
+						<Route exact path="/cart/checkout" component={Checkout} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/signup" component={Signup} />
 					</Switch>
