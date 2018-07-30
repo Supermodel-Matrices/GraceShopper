@@ -1,15 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchProduct} from '../store/products';
 import {addToCart} from '../store/cart';
+import axios from 'axios';
 
 export class SingleProduct extends Component {
-  componentDidMount () {
-		this.props.fetchProduct(this.props.match.params.id);
+  constructor () {
+    super();
+    this.state = {
+      product: {}
+    }
+  }
+
+  async componentDidMount () {
+    const product = await axios.get(`/api/products/${this.props.match.params.id}`);
+    this.setState({product: product.data});
   }
 
   render () {
-		const product = this.props.product
+		const product = this.state.product
     return (
       product ?
       <div className="right-panel">
@@ -17,6 +25,7 @@ export class SingleProduct extends Component {
           <div className="single-product-details">
             <p className="bold">{product.name}</p>
             <p>{product.price} USD</p>
+            <button type="button" className="btn-main" onClick={() => this.props.addToCart(product.id)}>+ Add</button>
             <p>{product.description}</p>
           </div>
           <img className="single-product-image" src={product.image} />
@@ -28,12 +37,8 @@ export class SingleProduct extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  product: state.products.currentProduct
-});
-
 const mapDispatchToProps = (dispatch) => ({
-  fetchProduct: (id) => dispatch(fetchProduct(id))
+  addToCart: (product) => dispatch(addToCart(product))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);
+export default connect(null, mapDispatchToProps)(SingleProduct);

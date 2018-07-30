@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const FETCH_CART = 'FETCH_CART';
 // const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART';
