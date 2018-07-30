@@ -23,18 +23,16 @@ export class AllProducts extends Component {
         ?
         <ul className="product-list">
           {products.map(product => (
-            <div key={product.id}>
-              <div className="product-preview">
-                <Link to={`/products/${product.id}`} className="undecorated-link">
-                  <img src={product.image} />
+            <div key={product.id} className="product-preview">
+              <Link to={`/products/${product.id}`} className="undecorated-link unpadded-link">
+                <img src={product.image} />
+              </Link>
+              <div className="product-preview-details">
+                <button type="button" className="btn-main" onClick={() => this.props.addToCart(product.id)}>+ Add</button>
+                <Link to={`/products/${product.id}`} className="undecorated-link unpadded-link">
+                  <p>{product.name}</p>
+                  <p>{product.price} USD</p>
                 </Link>
-                <div className="product-preview-details">
-                  <button type="button" className="btn-main" onClick={() => this.props.addToCart(product.id)}>+ Add</button>
-                  <Link to={`/products/${product.id}`} className="undecorated-link">
-                    <p>{product.name}</p>
-                    <p>{product.price} USD</p>
-                  </Link>
-                </div>
               </div>
             </div>
           ))}
