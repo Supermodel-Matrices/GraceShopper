@@ -76,8 +76,15 @@ app.post('/charge', async function (req, res, next) {
       currency: 'usd',
       customer: customer.id
     });
-    user ? await user.update({cart: {}}) : req.session.cart = {};
-    res.redirect('/success');
+
+
+    if(user){
+      await user.update({cart: {}});
+      res.Write("<script language='javascript'>window.alert('SuccessFully Payment!'); window.location='/';</script>");
+    } else {
+      req.session.cart = {};
+      req.redirect('/');
+    }
   } catch (err) {
     next(err);
   }
