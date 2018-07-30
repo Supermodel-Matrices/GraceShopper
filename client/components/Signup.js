@@ -8,8 +8,7 @@ class Signup extends Component {
 		this.state = {
       name: '',
 			email: '',
-			password: '',
-			cart: props.cart
+			password: ''
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
