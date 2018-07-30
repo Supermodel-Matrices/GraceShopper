@@ -88,20 +88,21 @@ class CartPage extends Component {
 					<div className="cart-items">
 						{this.state.cartItems.length ?
 							this.state.cartItems.map(item =>
-								(<div key={item.product.id}>
-										<div className="cart-row">
-											<Link to={`/products/${item.product.id}`} className="undecorated-link unpadded-link cart-image">
-												<img src={item.product.image} />
-											</Link>
-											<p>{item.product.name}</p>
-											<p>{item.product.price} USD</p>
-											<div className="cart-quantity">
-												<button className="btn-main" type="button" onClick={() => this.removeItem(item.product.id)}>—</button>
-												<p>{item.quantity}</p>
-												<button className="btn-main" type="button" onClick={() => this.addItem(item.product.id)}>+</button>
-											</div>
+								(
+								<div key={item.product.id}>
+									<div className="cart-row">
+										<Link to={`/products/${item.product.id}`} className="undecorated-link unpadded-link cart-image">
+											<img src={item.product.image} />
+										</Link>
+										<p>{item.product.name}</p>
+										<p>{item.product.price} USD</p>
+										<div className="cart-quantity">
+											<button className="btn-main" type="button" onClick={() => this.removeItem(item.product.id)}>—</button>
+											<p>{item.quantity}</p>
+											<button className="btn-main" type="button" onClick={() => this.addItem(item.product.id)}>+</button>
 										</div>
-								 </div>
+									</div>
+								</div>
 								))
 							:
 							<h1>No Items Currently In Your Cart</h1>
