@@ -45,7 +45,6 @@ export const login = (formData) => async dispatch => {
 };
 
 export const signup = (formData) => async dispatch => {
-<<<<<<< HEAD
 	let response;
 	try {
 		response = await axios.post('/auth/signup', formData);
@@ -55,11 +54,6 @@ export const signup = (formData) => async dispatch => {
 		return err.response.status;
 	}
 }
-=======
-	const response = await axios.post('/auth/signup', formData);
-	dispatch(loginUser(response.data));
-};
->>>>>>> user can edit name
 
 export const getLoggedInUser = () => async dispatch => {
 	const response = await axios.get('/auth/me');
