@@ -30,7 +30,7 @@ export class AllProducts extends Component {
     :
     (this.state.searchTerm ?
     products = this.props.allProducts.filter(product =>
-    product.name.match((new RegExp(this.state.searchTerm, "gi"))) || product.name.match((new RegExp(this.state.searchTerm, "gi")))) :
+    product.name.match((new RegExp(this.state.searchTerm, "gi"))) || product.description.match((new RegExp(this.state.searchTerm, "gi")))) :
     products = this.props.allProducts);
 
     return (
