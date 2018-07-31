@@ -17,15 +17,18 @@ class Login extends Component {
 	}
 	async handleSubmit (evt) {
 		evt.preventDefault();
+		let status;
 		if (Object.keys(this.props.cart).length) {
-			const status = await this.props.login({...this.state, cart: this.props.cart});
+			status = await this.props.login({...this.state, cart: this.props.cart});
 		} else {
-			const status = await this.props.login(this.state);
+			status = await this.props.login(this.state);
 		}
 		if (status === 401) {
+			console.log('this is 401 block');
 			document.getElementById('error').innerHTML = 'login failed - try again';
 		}
 		else {
+			console.log('this is else block');
 			this.props.history.push('/products');
 		}
 	}
