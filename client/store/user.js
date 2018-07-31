@@ -34,7 +34,6 @@ const updatedUser = (user) => ({
 });
 
 export const login = (formData) => async dispatch => {
-	let response;
 	try {
 		const response = await axios.put('/auth/login', formData);
 		dispatch(loginUser(response.data));

@@ -128,6 +128,11 @@ nav {
   margin: 3%;
 }
 
+.product-preview-small {
+  width: 15%;
+  margin: 2%;
+}
+
 .product-preview-details {
   display: flex;
   justify-content: space-between;
@@ -272,3 +277,16 @@ a:hover {
   background-color: transparent;
   border: none;
 }
+<<<<<<< HEAD
+=======
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-view {
+  position: static;
+  right: 100px;
+}
+>>>>>>> 2e85d5a4a0e92a85049eb936b3c84f2d6810f42c

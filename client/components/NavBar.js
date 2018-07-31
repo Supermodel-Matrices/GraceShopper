@@ -28,7 +28,7 @@ export class NavBar extends Component {
 					<div className="nav-bottom">
 					{this.props.user.id ?
 				<div>
-					<p className="nav-link"><Link to={`/user/${this.props.user.id}`}>Hi {this.props.user.name}!</Link></p>
+					<p className="nav-link"><Link to={this.props.user.admin ? '/admin' : `/user/${this.props.user.id}`}>Hi {this.props.user.name}!</Link></p>
 					<button type="button" onClick={this.props.logout} className="btn-main">Logout</button>
 				</div> :
 				<p className="nav-link"><span><Link to="/login">Login</Link>&nbsp;&nbsp;/&nbsp;&nbsp;<Link to="/signup">Signup</Link></span></p>}
