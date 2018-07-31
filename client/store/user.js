@@ -41,7 +41,6 @@ export const login = (formData) => async dispatch => {
 		dispatch(fetchCart(response.data.cart));
 	}
 	catch (err) {
-		console.log(err);
 		if (err.response) {
 			return err.response.status;
 		}
