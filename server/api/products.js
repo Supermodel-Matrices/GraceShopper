@@ -19,4 +19,22 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+router.post('/', async (req, res, next) => {
+  try {
+    const product = await Product.create(req.body);
+    res.status(201).json(product);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const [updatedRow, updatedProduct] = await Product.update(req.body, {where: {id: req.params.id}});
+    res.status(202).json(updatedProduct[0]);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
