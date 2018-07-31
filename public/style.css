@@ -219,16 +219,18 @@ a:hover {
 
 .user-container {
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
-
+  width: 50%;
+  float: right;
+  margin: 8% 8% 8% 0;
 }
 
 .order-container {
   display: flex;
-  justify-content: space-between;
-  width: 275px;
-  padding: 10%;
-  border-bottom: 1px solid #3331383b;
+  flex-direction: column;
+  float: right;
+  margin: 8% 8% 8% 0;
 }
 
 .order-product-image {
@@ -262,6 +264,11 @@ a:hover {
 
 .bold {
   font-weight: 700;
+}
+
+#name {
+  display: flex;
+  align-items: center;
 }
 
 #error {
