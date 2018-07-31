@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import Order from './Order';
-import store from '../store';
 import {getLoggedInUser} from '../store/user';
 import {fetchProducts} from '../store/products';
 import {withRouter, Link} from 'react-router-dom';

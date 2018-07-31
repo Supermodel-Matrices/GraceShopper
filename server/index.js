@@ -63,8 +63,7 @@ app.post('/charge', async function (req, res, next) {
     const tax = subtotal * .10;
     const shipping = 100;
     const total = subtotal + tax + shipping;
-    await Order.create({ items: user ? user.cart : req.session.cart, total: total, userId: user ? user.id : null});
-
+    
     //Creating Purchase On Stripe.
     const customer = await stripe.customers.create({
       email: req.body.stripeEmail,
@@ -76,6 +75,7 @@ app.post('/charge', async function (req, res, next) {
       currency: 'usd',
       customer: customer.id
     });
+    await Order.create({ items: user ? user.cart : req.session.cart, total: total, userId: user ? user.id : null});
     user ? await user.update({cart: {}}) : req.session.cart = {};
     res.status(202).redirect('/success');
   } catch (err) {

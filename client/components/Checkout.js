@@ -28,7 +28,7 @@ class Checkout extends Component {
         script.className = 'stripe-button';
         script.dataset.key = 'pk_test_Eiah13e1Nj0s73VpTZ4T36u8';
         script.dataset.amount = (this.props.location.state.total + this.props.location.state.shipping) * 100;
-        script.dataset.name = 'Supermodel Matrixes';
+        script.dataset.name = 'Supermodel Matrices';
         script.dataset.description = 'PAY ME!!!';
         script.dataset.image = '/cart.png';
         script.dataset.locale = 'auto';
