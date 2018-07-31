@@ -13,6 +13,7 @@ import Checkout from './Checkout';
 import Admin from './Admin';
 import Success from './Success';
 import EditProduct from './EditProduct';
+import AddProduct from './AddProduct';
 import {getLoggedInUser} from '../store/user';
 
 class Main extends Component {
@@ -30,6 +31,7 @@ class Main extends Component {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/products" component={AllProducts} />
+						<Route exact path="/products/add" component={AddProduct} />
 						<Route exact path="/products/category/:cat" component={AllProducts} />
 						<Route exact path="/products/:id" component={SingleProduct} />
 						<Route exact path="/products/:id/edit" component={EditProduct} />
