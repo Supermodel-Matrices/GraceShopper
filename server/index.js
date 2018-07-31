@@ -77,7 +77,7 @@ app.post('/charge', async function (req, res, next) {
       customer: customer.id
     });
     user ? await user.update({cart: {}}) : req.session.cart = {};
-    res.redirect('/success');
+    res.status(202).redirect('/success');
   } catch (err) {
     next(err);
   }
