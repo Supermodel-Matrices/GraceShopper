@@ -30,6 +30,7 @@ export class AddProduct extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     await axios.post('/api/products', this.state);
+    alert('Success');
     this.props.history.push('/admin');
   }
 

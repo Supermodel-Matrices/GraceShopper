@@ -38,6 +38,7 @@ export class EditProduct extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     await axios.put(`/api/products/${this.props.match.params.id}`, this.state);
+    alert('Success');
     this.props.history.push('/admin');
   }
 
