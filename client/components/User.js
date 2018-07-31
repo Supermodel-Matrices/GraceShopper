@@ -20,7 +20,7 @@ export class User extends Component {
   }
 
   async componentDidMount () {
-    this.props.loadInitialData();
+    await this.props.loadInitialData();
     if (+this.props.match.params.id === this.props.user.id) {
       const user = await axios.get(`/api/user/${this.props.match.params.id}`);
       this.setState({
