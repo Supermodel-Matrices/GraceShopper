@@ -30,14 +30,25 @@ router.put('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
 	try {
-		const user = await User.create(req.body);
-		req.login(user, err => {
-			if (err) {
-				next(err);
-			}
-			else {
-				res.json(user);}
-		});
+		const user = await User.findOne({
+      where: {
+        email: req.body.email
+      }
+    });
+    if (user) {
+      res.status(409).send('email already registered');
+		}
+		else {
+			const newUser = await User.create(req.body);
+			req.login(newUser, err => {
+				if (err) {
+					next(err);
+				}
+				else {
+					res.json(newUser);
+				}
+			});
+		}
 	}
 	catch (err) {
 		next(err);

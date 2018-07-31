@@ -50,14 +50,25 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
-// router.post('/', async (req, res, next) => {
-//   try {
-//     const user = await User.create(req.body);
-//     res.status(201).send(user);
-//   }
-//   catch (err) {
-//     next(err);
-//   }
-// });
+router.post('/', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        email: req.body.email
+      }
+    });
+    if (user) {
+      res.status(409).send('email already registered');
+    }
+    else {
+      const newUser = await User.create(req.body);
+      console.log(user);
+      res.status(201).send(newUser);
+    }
+  }
+  catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;
