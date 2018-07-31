@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getLoggedInUser } from '../store/user';
 import axios from 'axios';
 
-export class EditProduct extends Component {
+export class AddProduct extends Component {
   constructor() {
     super();
     this.state = {
@@ -19,14 +19,6 @@ export class EditProduct extends Component {
 
   async componentDidMount() {
     await this.props.loadInitialData();
-    const product = await axios.get(`/api/products/${this.props.match.params.id}`);
-    this.setState({
-      image: product.data.image,
-      name: product.data.name,
-      description: product.data.description,
-      category: product.data.category,
-      price: product.data.price,
-    });
   }
 
   handleChange(event) {
@@ -37,7 +29,7 @@ export class EditProduct extends Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    await axios.put(`/api/products/${this.props.match.params.id}`, this.state);
+    await axios.post('/api/products', this.state);
     this.props.history.push('/admin');
   }
 
@@ -46,8 +38,8 @@ export class EditProduct extends Component {
       this.props.user.admin ?
         <div className="right-panel">
           <div className="signin-login">
-              <h1>Edit Product</h1>
-              <br />
+            <h1>Add A Product</h1>
+            <br />
             <form className="form-main" onSubmit={this.handleSubmit}>
               <div className="form-main-field">
                 <label htmlFor="image">Product Image URL</label>
@@ -62,7 +54,6 @@ export class EditProduct extends Component {
                 <input type="text" name="description" value={this.state.description} onChange={this.handleChange} />
               </div>
               <div className="form-main-field">
-                <label htmlFor="category">Product Category</label>
                 <label htmlFor="category">Product Category</label>
                 <select name="category" onChange={this.handleChange}>
                   <option value="lighting" selected>Lighting</option>
@@ -96,4 +87,4 @@ const mapDispatchToProps = dispatch => ({
   loadInitialData: () => dispatch(getLoggedInUser()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(AddProduct);
