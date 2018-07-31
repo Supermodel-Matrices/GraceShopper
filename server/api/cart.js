@@ -38,8 +38,12 @@ router.put('/', async (req, res, next) => {
         }
         res.send(req.session.cart);
       } else {
-        const {[req.body.id]: ignore, ...newCart}  = req.session.cart;
-        req.session.cart = newCart;
+        if (req.session.cart[req.body.id] === 1) {
+          const {[req.body.id]: ignore, ...newCart}  = req.session.cart;
+          req.session.cart = newCart;
+        } else {
+          req.session.cart[req.body.id]--;
+        }
         res.send(req.session.cart);
       }
     }
