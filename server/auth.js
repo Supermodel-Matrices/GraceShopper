@@ -1,10 +1,13 @@
 const router = require('express').Router();
-const {User} = require('./db');
+const {User, Order} = require('./db');
 module.exports = router;
 
 router.put('/login', async (req, res, next) => {
 	try {
 		const user = await User.findOne({
+			include: [{
+				model: Order
+			}],
 			where: {email: req.body.email}
 		});
 		if (!user) {
@@ -14,10 +17,27 @@ router.put('/login', async (req, res, next) => {
 			res.status(401).send('Incorrect password');
 		}
 		else {
-			req.login(user, err => {
-				if (err) next(err);
-				else res.json(user);
-			});
+			if (req.body.cart) {
+				console.log(req.body.cart, user.cart);
+				let newCart = user.cart;
+				for (let key in req.body.cart) {
+					if (newCart[key]) {
+						newCart[key] += req.body.cart[key];
+					} else {
+						newCart[key] = req.body.cart[key];
+					}
+				}
+				updatedUser = await user.update({cart: newCart});
+				req.login(updatedUser, err => {
+					if (err) next(err);
+					else res.json(updatedUser);
+				});
+			} else {
+				req.login(user, err => {
+					if (err) next(err);
+					else res.json(user);
+				});
+			}
 		}
 	}
 	catch (err) {
