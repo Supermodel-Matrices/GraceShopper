@@ -40,34 +40,38 @@ class Checkout extends Component {
     render() {
         return (
             <div className="right-panel">
-                <div className="title">
-                    <h1>CHECKOUT</h1>
-                </div>
-                <div>
-                    {this.state.cartItems.length ?
-                        this.state.cartItems.map(item =>
-                            (<div key={item.product.id}>
-                                <Link to={`/products/${item.product.id}`}>
-                                    <div>
-                                        <h4>{item.product.name}</h4>
-                                        <p>{item.product.price} USD</p>
-                                        <p>Q: {item.quantity}</p>
-                                    </div>
-                                </Link>
-                            </div>
-                            ))
-                        :
-                        <h1>No Items To Checkout</h1>
-                    }
-                </div>
-                <div className="cartInfo">
-                    <h3>Subtotal: &#36;{this.state.subtotal}</h3>
-                    <h3>Tax: &#36;{this.state.tax}</h3>
-                    <h3>Shipping: &#36;{this.state.shipping} </h3>
-                    <h2>Total: &#36;{this.state.total ? this.state.total + this.state.shipping : 0}</h2>
-                </div>
-                <div>
-                    <form action="/charge" method="POST" id="stripe" />
+                <div className="cart">
+                    <div className="cart-heading">
+                        <h1 className="bold">CHECKOUT</h1>
+                    </div>
+                    <div className="cart-items">
+                        {this.state.cartItems.length ?
+                            this.state.cartItems.map(item =>
+                                (<div className="cart-row" key={item.product.id}>
+                                    <Link to={`/products/${item.product.id}`}>
+                                        <div>
+                                            <h4>{item.product.name}</h4>
+                                            <p>{item.product.price} USD</p>
+                                            <div className="cart-quantity">
+                                                <p>{item.quantity}</p>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+                                ))
+                            :
+                            <h1>No Items To Checkout</h1>
+                        }
+                    </div>
+                    <div className="cart-cost">
+                        <h3>Subtotal: &#36;{this.state.subtotal}</h3>
+                        <h3>Tax: &#36;{this.state.tax}</h3>
+                        <h3>Shipping: &#36;{this.state.shipping} </h3>
+                        <h2>Total: &#36;{this.state.total ? this.state.total + this.state.shipping : 0}</h2>
+                    </div>
+                    <div>
+                        <form action="/charge" method="POST" id="stripe" />
+                    </div>
                 </div>
             </div>
         );

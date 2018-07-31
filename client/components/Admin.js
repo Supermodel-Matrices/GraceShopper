@@ -8,7 +8,6 @@ import {fetchProducts} from '../store/products';
 import {withRouter, Link} from 'react-router-dom';
 
 export class Admin extends Component {
-
   constructor () {
     super();
     this.state = {
@@ -49,12 +48,13 @@ export class Admin extends Component {
           <div className="product-list">
             {this.props.products.map(product =>
               (
-              <div key={product.id} className="product-preview-small">
+                <div key={product.id} className="product-preview-small">
                 <img src={product.image} />
                 <p>{product.name}</p>
-                <Link to="/products/:id/edit"><button type="button" className="btn-main">- Edit</button></Link>
+                <Link to={`/products/${product.id}/edit`}><button type="button" className="btn-main">- Edit</button></Link>
               </div>
               ))}
+              <Link to="/products/add"><button type="button" className="btn-main">- Add -</button></Link>
           </div> :
           null
           }
