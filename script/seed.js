@@ -11,6 +11,8 @@ const users = [
   { name: 'Seeing Power', email: 'ctown@email.com', password: '123S' },
   { name: 'Hahah Woza', email: 'dtown@email.com', password: '123S' },
   { name: 'Normal Name', email: 'etown@email.com', password: '123S' },
+  { name: 'Cheryl Ng', email: 'cherylngql@gmail.com', password: 'iamanadmin', admin: true},
+  { name: 'Jessica Hsu', email: 'jessica@gmail.com', password: 'iamanadmin', admin: true}
 ];
 
 const products = [

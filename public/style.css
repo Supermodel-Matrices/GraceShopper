@@ -127,6 +127,11 @@ nav {
   margin: 3%;
 }
 
+.product-preview-small {
+  width: 15%;
+  margin: 2%;
+}
+
 .product-preview-details {
   display: flex;
   justify-content: space-between;
@@ -262,4 +267,32 @@ a:hover {
 #error {
   text-align: center;
   color: #963333;
+}
+
+#searchbar {
+  width: 150px;
+  position: fixed;
+  left: 20px;
+  bottom: 130px;
+}
+
+#search {
+  margin-left: 20px;
+  width: 70px;
+  background-color: transparent;
+}
+
+.search-btn {
+  background-color: transparent;
+  border: none;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-view {
+  position: static;
+  right: 100px;
 }
