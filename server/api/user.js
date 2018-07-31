@@ -13,7 +13,8 @@ router.get('/:id', async (req, res, next) => {
         }
       });
       res.status(200).json(user);
-    } else {
+    }
+    else {
       res.status(403).end();
     }
   }
@@ -24,26 +25,39 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const updatedUser = await User.update(req.body, {
-      where: {
-        id: req.params.id
-      }
-    });
-    res.status(200).send(updatedUser);
+    if (req.user.id === +req.params.id) {
+      const updatedUser = await User.update(req.body, {
+        where: {
+          id: req.params.id
+        }
+      });
+      const user = await User.findOne({
+        include: [{
+            model: Order
+          }],
+        where: {
+          id: req.params.id
+        }
+      });
+      res.status(200).send(user);
+    }
+    else {
+      res.status(403).end();
+    }
   }
   catch (err) {
     next(err);
   }
 });
 
-router.post('/', async (req, res, next) => {
-  try {
-    const user = await User.create(req.body);
-    res.status(201).send(user);
-  }
-  catch (err) {
-    next(err);
-  }
-})
+// router.post('/', async (req, res, next) => {
+//   try {
+//     const user = await User.create(req.body);
+//     res.status(201).send(user);
+//   }
+//   catch (err) {
+//     next(err);
+//   }
+// });
 
 module.exports = router;

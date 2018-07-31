@@ -1,10 +1,13 @@
 const router = require('express').Router();
-const {User} = require('./db');
+const {User, Order} = require('./db');
 module.exports = router;
 
 router.put('/login', async (req, res, next) => {
 	try {
 		const user = await User.findOne({
+			include: [{
+				model: Order
+			}],
 			where: {email: req.body.email}
 		});
 		if (!user) {
