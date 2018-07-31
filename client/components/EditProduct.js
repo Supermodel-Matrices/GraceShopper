@@ -63,9 +63,9 @@ export class EditProduct extends Component {
               </div>
               <div className="form-main-field">
                 <label htmlFor="category">Product Category</label>
-                <label htmlFor="category">Product Category</label>
                 <select name="category" onChange={this.handleChange}>
-                  <option value="lighting" selected>Lighting</option>
+                  <option selected> - </option>
+                  <option value="lighting">Lighting</option>
                   <option value="greenery">Greenery</option>
                   <option value="textiles">Textiles</option>
                   <option value="wall-decor">Wall Decor</option>

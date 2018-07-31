@@ -10,7 +10,7 @@ export class AddProduct extends Component {
       image: '',
       name: '',
       description: '',
-      category: '',
+      category: 'lighting',
       price: '',
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,7 +56,7 @@ export class AddProduct extends Component {
               <div className="form-main-field">
                 <label htmlFor="category">Product Category</label>
                 <select name="category" onChange={this.handleChange}>
-                  <option value="lighting" selected>Lighting</option>
+                  <option value="lighting">Lighting</option>
                   <option value="greenery">Greenery</option>
                   <option value="textiles">Textiles</option>
                   <option value="wall-decor">Wall Decor</option>
