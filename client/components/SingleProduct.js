@@ -9,6 +9,7 @@ export class SingleProduct extends Component {
     this.state = {
       product: {}
     }
+    this.handleClick = this.handleClick.bind(this)
   }
 
   async componentDidMount () {
@@ -28,7 +29,6 @@ export class SingleProduct extends Component {
             <br />
             <p className="bold">{product.name}</p>
             <p>{product.price} USD</p>
-            <button type="button" className="btn-main" onClick={() => this.props.addToCart(product.id)}>+ Add</button>
             <p>{product.description}</p>
           </div>
           <img className="single-product-image" src={product.image} />
