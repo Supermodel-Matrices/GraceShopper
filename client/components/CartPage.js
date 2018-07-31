@@ -43,7 +43,7 @@ class CartPage extends Component {
 		let newCart = this.state.cartItems;
 		newCart.map(item => {
 			if (item.product.id === id) {
-					item.quantity++;
+				item.quantity++;
 			}
 		});
 		this.setState({cartItems: newCart});
@@ -62,7 +62,7 @@ class CartPage extends Component {
 				}
 			}
 		});
-		this.setState({ cartItems: newCart });
+		this.setState({cartItems: newCart});
 		this.props.removeFromCart(id);
 		this.calculatePrices(newCart);
 	}
@@ -89,20 +89,20 @@ class CartPage extends Component {
 						{this.state.cartItems.length ?
 							this.state.cartItems.map(item =>
 								(
-								<div key={item.product.id}>
-									<div className="cart-row">
-										<Link to={`/products/${item.product.id}`} className="undecorated-link unpadded-link cart-image">
-											<img src={item.product.image} />
-										</Link>
-										<p>{item.product.name}</p>
-										<p>{item.product.price} USD</p>
-										<div className="cart-quantity">
-											<button className="btn-main" type="button" onClick={() => this.removeItem(item.product.id)}>—</button>
-											<p>{item.quantity}</p>
-											<button className="btn-main" type="button" onClick={() => this.addItem(item.product.id)}>+</button>
+									<div key={item.product.id}>
+										<div className="cart-row">
+											<Link to={`/products/${item.product.id}`} className="undecorated-link unpadded-link cart-image">
+												<img src={item.product.image} />
+											</Link>
+											<p>{item.product.name}</p>
+											<p>{item.product.price} USD</p>
+											<div className="cart-quantity">
+												<button className="btn-main" type="button" onClick={() => this.removeItem(item.product.id)}>—</button>
+												<p>{item.quantity}</p>
+												<button className="btn-main" type="button" onClick={() => this.addItem(item.product.id)}>+</button>
+											</div>
 										</div>
 									</div>
-								</div>
 								))
 							:
 							<h1>No Items Currently In Your Cart</h1>
@@ -113,7 +113,7 @@ class CartPage extends Component {
 						<p><span className="bold">Tax</span><span> {this.state.tax}</span></p>
 						<p><span className="bold">Shipping</span><span> {this.state.shipping}</span></p>
 						<p><span className="bold">TOTAL</span><span> {this.state.total ? this.state.total + this.state.shipping : 0} USD</span></p>
-						<Link to={{pathname: '/cart/checkout', state: this.state }} className="link-bordered unpadded-link">Checkout</Link>
+						{this.state.cartItems.length ? <Link to={{ pathname: '/cart/checkout', state: this.state }} className="link-bordered unpadded-link">Checkout</Link> : <Link to="/cart" className="link-bordered unpadded-link">Checkout</Link>}
 					</div>
 				</div>
 			</div>
@@ -128,9 +128,9 @@ const mapToState = (state) => ({
 });
 
 const mapToDispatch = dispatch => ({
-		getCart: () => dispatch(getCart()),
-		addToCart: (id) => dispatch(addToCart(id)),
-		removeFromCart: (id) => dispatch(removeFromCart(id))
+	getCart: () => dispatch(getCart()),
+	addToCart: (id) => dispatch(addToCart(id)),
+	removeFromCart: (id) => dispatch(removeFromCart(id))
 });
 
 export default connect(mapToState, mapToDispatch)(CartPage);
