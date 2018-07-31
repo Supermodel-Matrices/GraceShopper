@@ -10,6 +10,7 @@ import NavBar from './NavBar';
 import Login from './Login';
 import Signup from './Signup';
 import Checkout from './Checkout';
+import Admin from './Admin';
 import {getLoggedInUser} from '../store/user';
 
 class Main extends Component {
@@ -29,6 +30,7 @@ class Main extends Component {
 						<Route exact path="/products" component={AllProducts} />
 						<Route exact path="/products/category/:cat" component={AllProducts} />
 						<Route exact path="/products/:id" component={SingleProduct} />
+						<Route exact path="/admin" component={Admin} />
 						<Route exact path="/user/:id" component={User} />
 						<Route exact path="/cart" component={CartPage} />
 						<Route exact path="/cart/checkout" component={Checkout} />

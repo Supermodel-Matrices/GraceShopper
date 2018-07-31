@@ -3,7 +3,7 @@ const {User, Order} = require('../db/index');
 
 router.get('/:id', async (req, res, next) => {
   try {
-    if (req.user.id === +req.params.id) {
+    if (req.user.id === +req.params.id || req.user.admin) {
       const user = await User.findOne({
         include: [{
             model: Order
