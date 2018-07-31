@@ -12,7 +12,7 @@ import Signup from './Signup';
 import Checkout from './Checkout';
 import Admin from './Admin';
 import Success from './Success';
-
+import EditProduct from './EditProduct';
 import {getLoggedInUser} from '../store/user';
 
 class Main extends Component {
@@ -32,6 +32,7 @@ class Main extends Component {
 						<Route exact path="/products" component={AllProducts} />
 						<Route exact path="/products/category/:cat" component={AllProducts} />
 						<Route exact path="/products/:id" component={SingleProduct} />
+						<Route exact path="/products/:id/edit" component={EditProduct} />
 						<Route exact path="/admin" component={Admin} />
 						<Route exact path="/user/:id" component={User} />
 						<Route exact path="/cart" component={CartPage} />

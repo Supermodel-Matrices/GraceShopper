@@ -1,9 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const Success = (props) => {
-  console.log(props);
-
+const Success = () => {
   return (
   <div className="right-panel">
     <div className="signin-login">
