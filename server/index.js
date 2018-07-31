@@ -51,20 +51,6 @@ app.use('/google', require('./oauth'));
 
 app.post('/charge', async function (req, res, next) {
   try {
-    //Creating Purchase On Stripe.
-    const customer = await stripe.customers.create({
-      email: req.body.stripeEmail,
-      source: req.body.stripeToken
-    });
-    const trans = await stripe.charges.create({
-      amount: total,
-      description: 'Home Decor Purchase',
-      currency: 'usd',
-      customer: customer.id
-    });
-    user ? await user.update({cart: {}}) : req.session.cart = {};
-    res.status(202).redirect('/success');
-
     //Calculate Price And Create Order For Database
     const user = await User.findOne({ where: { email: req.body.stripeEmail } });
     let cartKeys;
@@ -77,7 +63,21 @@ app.post('/charge', async function (req, res, next) {
     const tax = subtotal * .10;
     const shipping = 100;
     const total = subtotal + tax + shipping;
+    
+    //Creating Purchase On Stripe.
+    const customer = await stripe.customers.create({
+      email: req.body.stripeEmail,
+      source: req.body.stripeToken
+    });
+    const trans = await stripe.charges.create({
+      amount: total,
+      description: 'Home Decor Purchase',
+      currency: 'usd',
+      customer: customer.id
+    });
     await Order.create({ items: user ? user.cart : req.session.cart, total: total, userId: user ? user.id : null});
+    user ? await user.update({cart: {}}) : req.session.cart = {};
+    res.status(202).redirect('/success');
   } catch (err) {
     next(err);
   }
