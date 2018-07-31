@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const FETCH_CART = 'FETCH_CART';
+const EMPTY_CART = 'EMPTY_CART';
 // const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART';
 // const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART';
 
@@ -8,9 +9,14 @@ const FETCH_CART = 'FETCH_CART';
 const initialState = {};
 
 //Action Creator
-const fetchCart = (cart) => ({
+export const fetchCart = (cart) => ({
 	type: FETCH_CART,
 	cart
+});
+
+export const emptyCart = () => ({
+	type: EMPTY_CART,
+	cart: {}
 });
 
 //Thunk
@@ -35,6 +41,8 @@ export const cartReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case FETCH_CART:
 			return action.cart;
+		case EMPTY_CART:
+		  return action.cart;
 		default:
 			return state;
 	}

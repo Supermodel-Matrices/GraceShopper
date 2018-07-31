@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {emptyCart, fetchCart} from './cart';
 
 const LOGIN_USER = 'LOGIN_USER';
 const LOG_OUT = 'LOG_OUT';
@@ -37,9 +38,12 @@ export const login = (formData) => async dispatch => {
 	try {
 		const response = await axios.put('/auth/login', formData);
 		dispatch(loginUser(response.data));
+		dispatch(fetchCart(response.data.cart));
 	}
 	catch (err) {
-		return err.response.status;
+		if (err.response) {
+			return err.response.status;
+		}
 	}
 };
 
@@ -64,6 +68,7 @@ export const getLoggedInUser = () => async dispatch => {
 export const logoutUser = () => async dispatch => {
 	await axios.delete('/auth/logout');
 	dispatch(logout());
+	dispatch(emptyCart());
 };
 
 export const updateUser = (update) => async dispatch => {

@@ -21,7 +21,7 @@ class Signup extends Component {
 	}
 	async handleSubmit (evt) {
 		evt.preventDefault();
-		const status = await this.props.signup(this.state);
+		const status = await this.props.signup({...this.state, cart: this.props.cart});
 		if (status === 409) {
 			document.getElementById('error').innerHTML = 'email is already registered';
 		}
