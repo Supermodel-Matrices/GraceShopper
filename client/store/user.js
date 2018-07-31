@@ -37,7 +37,6 @@ const updatedUser = (user) => ({
 export const login = (formData) => async dispatch => {
 	try {
 		const response = await axios.put('/auth/login', formData);
-		console.log(response.data);
 		dispatch(loginUser(response.data));
 		dispatch(fetchCart(response.data.cart));
 	}
