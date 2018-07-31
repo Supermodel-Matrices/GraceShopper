@@ -62,16 +62,6 @@ export class EditProduct extends Component {
                 <input type="text" name="description" value={this.state.description} onChange={this.handleChange} />
               </div>
               <div className="form-main-field">
-                <label htmlFor="category">Product Category</label>
-                <label htmlFor="category">Product Category</label>
-                <select name="category" onChange={this.handleChange}>
-                  <option value="lighting" selected>Lighting</option>
-                  <option value="greenery">Greenery</option>
-                  <option value="textiles">Textiles</option>
-                  <option value="wall-decor">Wall Decor</option>
-                </select>
-              </div>
-              <div className="form-main-field">
                 <label htmlFor="price">Product Price</label>
                 <input type="text" name="price" value={this.state.price} onChange={this.handleChange} />
               </div>
