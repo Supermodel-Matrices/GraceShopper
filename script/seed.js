@@ -46,7 +46,6 @@ const orders = [
   { items: {19: 80}, total: 70500, userId: 6 },
   { items: {19: 80}, total: 70500, userId: 6 },
   { items: {19: 80}, total: 70500, userId: 6 }
-
 ];
 
 const seed = () =>
