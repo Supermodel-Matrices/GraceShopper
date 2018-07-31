@@ -9,7 +9,6 @@ export class SingleProduct extends Component {
     this.state = {
       product: {}
     }
-    this.handleClick = this.handleClick.bind(this)
   }
 
   async componentDidMount () {
