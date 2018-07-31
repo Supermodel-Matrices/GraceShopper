@@ -51,20 +51,6 @@ app.use('/google', require('./oauth'));
 
 app.post('/charge', async function (req, res, next) {
   try {
-    //Calculate Price And Create Order For Database
-    const user = await User.findOne({ where: { email: req.body.stripeEmail } });
-    let cartKeys;
-    user ? cartKeys = Object.keys(user.cart) : cartKeys = Object.keys(req.session.cart);
-    let subtotal = 0;
-    for (let i = 0; i < cartKeys.length; i++) {
-      const product = await Product.findOne({ where: { id: cartKeys[i] } });
-      subtotal += (product.price * (user ? user.cart[cartKeys[i]] : req.session.cart[cartKeys[i]]));
-    }
-    const tax = subtotal * .10;
-    const shipping = 100;
-    const total = subtotal + tax + shipping;
-    await Order.create({ items: user ? user.cart : req.session.cart, total: total, userId: user ? user.id : null});
-
     //Creating Purchase On Stripe.
     const customer = await stripe.customers.create({
       email: req.body.stripeEmail,
@@ -78,6 +64,20 @@ app.post('/charge', async function (req, res, next) {
     });
     user ? await user.update({cart: {}}) : req.session.cart = {};
     res.status(202).redirect('/success');
+
+    //Calculate Price And Create Order For Database
+    const user = await User.findOne({ where: { email: req.body.stripeEmail } });
+    let cartKeys;
+    user ? cartKeys = Object.keys(user.cart) : cartKeys = Object.keys(req.session.cart);
+    let subtotal = 0;
+    for (let i = 0; i < cartKeys.length; i++) {
+      const product = await Product.findOne({ where: { id: cartKeys[i] } });
+      subtotal += (product.price * (user ? user.cart[cartKeys[i]] : req.session.cart[cartKeys[i]]));
+    }
+    const tax = subtotal * .10;
+    const shipping = 100;
+    const total = subtotal + tax + shipping;
+    await Order.create({ items: user ? user.cart : req.session.cart, total: total, userId: user ? user.id : null});
   } catch (err) {
     next(err);
   }
