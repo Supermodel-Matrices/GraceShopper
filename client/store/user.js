@@ -77,3 +77,10 @@ export const updateUser = (update) => async dispatch => {
 	dispatch(updatedUser(updated));
 	return updated;
 };
+
+export const updateUser = (update) => async dispatch => {
+	const response = await axios.put(`/api/user/${update.id}`, update);
+	const updated = response.data;
+	dispatch(updatedUser(updated));
+	return updated;
+};
