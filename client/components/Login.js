@@ -17,7 +17,11 @@ class Login extends Component {
 	}
 	async handleSubmit (evt) {
 		evt.preventDefault();
-		const status = await this.props.login(this.state);
+		if (Object.keys(this.props.cart).length) {
+			const status = await this.props.login({...this.state, cart: this.props.cart});
+		} else {
+			const status = await this.props.login(this.state);
+		}
 		if (status === 401) {
 			document.getElementById('error').innerHTML = 'login failed - try again';
 		}
@@ -61,7 +65,11 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	  login: (formData) => dispatch(login(formData))
+	login: (formData) => dispatch(login(formData))
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapStateToProps = (state) => ({
+  cart: state.cart
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

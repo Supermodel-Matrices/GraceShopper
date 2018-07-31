@@ -5,13 +5,12 @@ import {logoutUser} from '../store/user';
 import {getCart} from '../store/cart';
 
 export class NavBar extends Component {
+
 	componentDidMount () {
 		this.props.getCart();
 	}
 
 	render () {
-		let cartQuantities = (Object.values(this.props.cart));
-		let cartCount = cartQuantities.length ? cartQuantities.reduce((acc, i) => acc + i, 0) : 0;
 			return (
 				<div className="nav-container">
 					<div className="nav-top">
@@ -22,7 +21,7 @@ export class NavBar extends Component {
 							<p className="nav-link"><Link to="/products/category/greenery">Greenery</Link></p>
 							<p className="nav-link"><Link to="/products/category/textiles">Textiles</Link></p>
 							<p className="nav-link"><Link to="/products/category/wall-decor">Wall Decor</Link></p>
-							<p className="nav-link"><Link to="/cart"><img src="https://cdn1.iconfinder.com/data/icons/social-productivity-line-art-4/128/shopping-cart2-512.png" className="cart-icon" />&nbsp;&nbsp;&nbsp;&nbsp;<span className="cart-count">{cartCount}</span></Link></p>
+							<p className="nav-link"><Link to="/cart"><img src="https://cdn1.iconfinder.com/data/icons/social-productivity-line-art-4/128/shopping-cart2-512.png" className="cart-icon" />&nbsp;&nbsp;&nbsp;&nbsp;<span className="cart-count">{this.props.cartCount ? this.props.cartCount : 0}</span></Link></p>
 					</nav>
 					</div>
 					<div className="nav-bottom">
@@ -41,7 +40,8 @@ export class NavBar extends Component {
 
 const mapStateToProps = (state) => ({
 	user: state.user,
-	cart: state.cart
+	cart: state.cart,
+	cartCount: Object.values(state.cart).reduce((acc, i) => acc + i, 0)
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
   logout: () => {
