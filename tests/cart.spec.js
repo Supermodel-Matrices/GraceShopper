@@ -11,7 +11,7 @@ enzyme.configure({ adapter })
 import { CartPage } from '../client/components/CartPage'
 import { getCartItems, addItemToCart, removeItemFromCart } from '../client/store/cart';
 
-describe('Front-End', () => {
+xdescribe('Front-End', () => {
 
     const cart = [
         { id: 1, name: 'Candles', image: 'https://www.ikea.com/us/en/images/products/fenomen-unscented-block-candle-beige__0432192_PE586207_S4.JPG', description: 'ITS A CANDLE! MARVEL AT ITS LIGHT!', category: 'lighting', price: 30 },
@@ -49,7 +49,7 @@ describe('Front-End', () => {
 
 });
 
-describe('Action Creators', ()=> {
+xdescribe('Action Creators', ()=> {
 
     describe('getCartItems', () => {
         it('returns a proper get action', () => {

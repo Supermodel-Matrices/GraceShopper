@@ -12,7 +12,7 @@ const adapter = new Adapter()
 enzyme.configure({adapter})
 
 // Front-end
-describe('Front-End', () => {
+xdescribe('Front-End', () => {
 
 	let user, userToDisplay, userInstance;
 
@@ -43,7 +43,7 @@ describe('Front-End', () => {
 });
 
 // Model
-describe('User model', () => {
+xdescribe('User model', () => {
 
 	it('requires name of user', async () => {
 		const user = User.build();
@@ -76,7 +76,7 @@ describe('User model', () => {
 });
 
 // Routes
-describe('User route', () => {
+xdescribe('User route', () => {
 
 	beforeEach(async () => {
 		const userToCreate = { name: 'Alex Roger', email: 'atown@email.com', password: '123S' };

@@ -23,7 +23,7 @@ describe('Front-End', () => {
 		{ name: 'White Candles', image: 'https://images.pexels.com/photos/783200/pexels-photo-783200.jpeg?auto=compress&cs=tinysrgb&h=350', description: 'ITS A CANDLE! MARVEL AT ITS WHITE LIGHT!', category: 'lighting', price: 5 },
 	];
 
-	describe('<AllProducts /> component', () => {
+	xdescribe('<AllProducts /> component', () => {
 		it('renders an unordered list', async () => {
 			const allProducts = shallow(<AllProducts store={store} allProducts={products} fetchProducts={fetchProducts} />);
 			expect(allProducts.find('ul')).to.have.length(1);

@@ -24,11 +24,9 @@ class Login extends Component {
 			status = await this.props.login(this.state);
 		}
 		if (status === 401) {
-			console.log('this is 401 block');
 			document.getElementById('error').innerHTML = 'login failed - try again';
 		}
 		else {
-			console.log('this is else block');
 			this.props.history.push('/products');
 		}
 	}
