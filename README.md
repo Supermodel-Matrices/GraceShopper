@@ -35,7 +35,7 @@ Full-stack JavaScript e-commerce site selling home decor.
 
 ## View
 
-Deployed on [supermodel-matrices.herokuapp.com](supermodel-matrices.herokuapp.com)
+Deployed on [http://supermodel-matrices.herokuapp.com/](http://supermodel-matrices.herokuapp.com/)
 
 
 ## Installation
@@ -59,6 +59,9 @@ In your browser:
 ```bash
 localhost:3000
 ```
+
+## Screenshot
+![screenshot](screenshot.png)
 
 ## Team
 
