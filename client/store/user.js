@@ -41,7 +41,9 @@ export const login = (formData) => async dispatch => {
 		dispatch(fetchCart(response.data.cart));
 	}
 	catch (err) {
+		console.log('there is an error', err, err.response)
 		if (err.response) {
+			console.log('I have a response and my status is', err.response.status);
 			return err.response.status;
 		}
 	}

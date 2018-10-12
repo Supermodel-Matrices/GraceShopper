@@ -18,6 +18,7 @@ router.put('/login', async (req, res, next) => {
 		}
 		else {
 			if (req.body.cart) {
+				console.log(req.body.cart, user.cart);
 				let newCart = user.cart;
 				for (let key in req.body.cart) {
 					if (newCart[key]) {

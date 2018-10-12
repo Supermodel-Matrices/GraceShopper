@@ -61,8 +61,10 @@ router.post('/', async (req, res, next) => {
       res.status(409).send('email already registered');
     }
     else {
+      console.log(req.session.cart);
       const newUser = await User.create(req.body);
       req.session.cart = {};
+      console.log(user);
       res.status(201).send(newUser);
     }
   }
